@@ -8,12 +8,12 @@ import { WorldMap } from "@/components/ui/WorldMap";
 import type { MapRegion } from "@/components/ui/WorldMap";
 
 const regions: MapRegion[] = [
-  { name: "North America", coordinates: [-100, 45], sublabel: "USA, Canada, Mexico" },
-  { name: "Europe", coordinates: [10, 50], sublabel: "UK, Germany, Italy, Spain, France" },
-  { name: "Middle East", coordinates: [45, 25], sublabel: "UAE, Saudi Arabia, Oman, Qatar" },
-  { name: "East Asia", coordinates: [115, 35], sublabel: "China, Japan, South Korea" },
-  { name: "Southeast Asia", coordinates: [105, 10], sublabel: "Singapore, Thailand, Vietnam" },
-  { name: "Africa", coordinates: [20, 0], sublabel: "South Africa, Kenya, Nigeria" },
+  { name: "North America", coordinates: [-100, 45], sublabel: "150+ Projects" },
+  { name: "Europe", coordinates: [10, 50], sublabel: "200+ Projects" },
+  { name: "Middle East", coordinates: [48, 28], sublabel: "300+ Projects" },
+  { name: "East Asia", coordinates: [115, 35], sublabel: "120+ Projects" },
+  { name: "Southeast Asia", coordinates: [105, 8], sublabel: "80+ Projects" },
+  { name: "Africa", coordinates: [22, -2], sublabel: "60+ Projects" },
 ];
 
 const stats = [
@@ -35,25 +35,15 @@ export function GlobalPresencePreview() {
           description="Our premium granite adorns prestigious projects across 50+ countries, spanning five continents."
         />
 
-        {/* Map Container */}
-        <div className="relative bg-white rounded-3xl border border-[#E5E7EB] overflow-hidden shadow-sm mb-14">
-          {/* Decorative gradient overlay at edges */}
-          <div className="absolute inset-0 pointer-events-none z-10">
-            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
-            <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-white to-transparent" />
-            <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-white to-transparent" />
-          </div>
-
+        <div className="relative bg-white rounded-3xl border border-[#E5E7EB] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.04)] mb-14">
           <WorldMap
             regions={regions}
             activeRegion={activeRegion}
             onRegionHover={setActiveRegion}
-            height="450px"
+            height="480px"
           />
         </div>
 
-        {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, i) => (
             <motion.div

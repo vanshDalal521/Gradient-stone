@@ -1,21 +1,21 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useCallback } from "react";
 import {
   ComposableMap,
   Geographies,
   Geography,
   Marker,
-  Line,
   Sphere,
+  Graticule,
 } from "react-simple-maps";
 
-const GEO_URL = "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+const GEO_URL =
+  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 export interface MapRegion {
   name: string;
   coordinates: [number, number];
-  label?: string;
   sublabel?: string;
 }
 
@@ -23,47 +23,112 @@ interface WorldMapProps {
   regions: MapRegion[];
   activeRegion?: string | null;
   onRegionHover?: (name: string | null) => void;
-  showLabels?: boolean;
   showTooltips?: boolean;
   className?: string;
   IndiaLabel?: string;
   height?: string;
 }
 
-const INDIA_COORDS: [number, number] = [78, 22];
+const INDIA: [number, number] = [78.9629, 20.5937];
+
+function PulseRing({ active }: { active: boolean }) {
+  return (
+    <>
+      <circle
+        r={active ? 22 : 0}
+        fill="none"
+        stroke="#B8860B"
+        strokeWidth={1}
+        opacity={0}
+        style={{
+          transition: "r 0.5s ease, opacity 0.5s ease",
+          ...(active
+            ? { opacity: 0.15 }
+            : {}),
+        }}
+      >
+        {active && (
+          <animate
+            attributeName="r"
+            from="8"
+            to="28"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+        )}
+        {active && (
+          <animate
+            attributeName="opacity"
+            from="0.3"
+            to="0"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+        )}
+      </circle>
+    </>
+  );
+}
 
 export function WorldMap({
   regions,
   activeRegion,
   onRegionHover,
-  showLabels = false,
   showTooltips = true,
   className = "",
   IndiaLabel = "INDIA",
   height = "100%",
 }: WorldMapProps) {
-  const [tooltipRegion, setTooltipRegion] = useState<string | null>(null);
+  const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
 
-  const handleRegionHover = (name: string | null) => {
-    setTooltipRegion(name);
-    onRegionHover?.(name);
-  };
+  const handleEnter = useCallback(
+    (name: string) => {
+      setHoveredRegion(name);
+      onRegionHover?.(name);
+    },
+    [onRegionHover]
+  );
+
+  const handleLeave = useCallback(() => {
+    setHoveredRegion(null);
+    onRegionHover?.(null);
+  }, [onRegionHover]);
 
   return (
     <div className={`relative w-full ${className}`} style={{ height }}>
       <ComposableMap
-        projection="geoNaturalEarth1"
+        projection="geoEqualEarth"
         projectionConfig={{
-          scale: 155,
-          center: [15, 10],
+          scale: 167,
+          center: [0, 20],
         }}
         style={{ width: "100%", height: "100%" }}
       >
+        <defs>
+          <radialGradient id="ocean-gradient" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stopColor="#F8FAFC" />
+            <stop offset="100%" stopColor="#EFF6FF" />
+          </radialGradient>
+          <radialGradient id="india-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#B8860B" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#B8860B" stopOpacity="0" />
+          </radialGradient>
+          <filter id="marker-shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="#B8860B" floodOpacity="0.3" />
+          </filter>
+          <filter id="tooltip-shadow" x="-20%" y="-20%" width="140%" height="160%">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.12" />
+          </filter>
+        </defs>
+
         {/* Ocean */}
-        <Sphere
-          stroke="#D1D5DB"
-          strokeWidth={0.5}
-          fill="#F0F4F8"
+        <Sphere stroke="none" fill="url(#ocean-gradient)" />
+
+        {/* Subtle graticule grid */}
+        <Graticule
+          stroke="#E2E8F0"
+          strokeWidth={0.4}
+          fill="none"
         />
 
         {/* Countries */}
@@ -75,21 +140,24 @@ export function WorldMap({
                 geography={geo}
                 style={{
                   default: {
-                    fill: "#E8ECF0",
-                    stroke: "#CBD5E1",
-                    strokeWidth: 0.4,
+                    fill: "#D5DDE5",
+                    stroke: "#FFFFFF",
+                    strokeWidth: 0.6,
                     outline: "none",
-                    cursor: "pointer",
-                    transition: "fill 0.2s ease, stroke 0.2s ease",
+                    cursor: "default",
+                    transition: "fill 0.25s ease",
                   },
                   hover: {
                     fill: "#B8860B",
-                    stroke: "#B8860B",
+                    stroke: "#FFFFFF",
                     strokeWidth: 0.6,
                     outline: "none",
+                    cursor: "pointer",
                   },
                   pressed: {
                     fill: "#9A7209",
+                    stroke: "#FFFFFF",
+                    strokeWidth: 0.6,
                     outline: "none",
                   },
                 }}
@@ -98,26 +166,38 @@ export function WorldMap({
           }
         </Geographies>
 
-        {/* Animated connection lines from India */}
+        {/* Curved connection lines from India to each region */}
         {regions.map((region) => {
           const isActive = activeRegion === region.name;
           return (
-            <Line
-              key={`line-${region.name}`}
-              from={INDIA_COORDS}
-              to={region.coordinates}
-              stroke="#B8860B"
-              strokeWidth={isActive ? 1.8 : 1}
-              strokeDasharray={isActive ? "8,4" : "6,5"}
-              strokeLinecap="round"
-              style={{
-                opacity: isActive ? 0.7 : 0.2,
-                transition: "opacity 0.3s ease, stroke-width 0.3s ease",
-                filter: isActive
-                  ? "drop-shadow(0 0 6px rgba(184,134,11,0.35))"
-                  : "none",
-              }}
-            />
+            <g key={`line-${region.name}`}>
+              {/* Shadow line */}
+              <line
+                x1={INDIA[0]}
+                y1={INDIA[1]}
+                x2={region.coordinates[0]}
+                y2={region.coordinates[1]}
+                stroke="#B8860B"
+                strokeWidth={isActive ? 2.5 : 1.5}
+                strokeDasharray={isActive ? "8,4" : "4,6"}
+                strokeLinecap="round"
+                opacity={isActive ? 0.12 : 0.06}
+                style={{ transition: "all 0.4s ease" }}
+              />
+              {/* Main line */}
+              <line
+                x1={INDIA[0]}
+                y1={INDIA[1]}
+                x2={region.coordinates[0]}
+                y2={region.coordinates[1]}
+                stroke="#B8860B"
+                strokeWidth={isActive ? 1.5 : 0.8}
+                strokeDasharray={isActive ? "8,4" : "4,6"}
+                strokeLinecap="round"
+                opacity={isActive ? 0.55 : 0.18}
+                style={{ transition: "all 0.4s ease" }}
+              />
+            </g>
           );
         })}
 
@@ -128,120 +208,141 @@ export function WorldMap({
             <Marker
               key={region.name}
               coordinates={region.coordinates}
-              onMouseEnter={() => handleRegionHover(region.name)}
-              onMouseLeave={() => handleRegionHover(null)}
+              onMouseEnter={() => handleEnter(region.name)}
+              onMouseLeave={handleLeave}
             >
-              {/* Outer glow ring */}
+              {/* Animated pulse for active */}
+              <PulseRing active={!!isActive} />
+
+              {/* Outer glow */}
               <circle
-                r={isActive ? 18 : 14}
-                fill="#B8860B"
-                opacity={isActive ? 0.08 : 0.04}
-                style={{ transition: "all 0.35s ease" }}
+                r={isActive ? 16 : 10}
+                fill="url(#india-glow)"
+                opacity={isActive ? 1 : 0.4}
+                style={{ transition: "all 0.4s ease" }}
               />
-              {/* Middle ring */}
+
+              {/* Ring */}
               <circle
-                r={isActive ? 12 : 9}
+                r={isActive ? 9 : 6}
                 fill="none"
                 stroke="#B8860B"
-                strokeWidth={isActive ? 1.8 : 1}
-                opacity={isActive ? 0.4 : 0.15}
-                style={{ transition: "all 0.35s ease" }}
+                strokeWidth={isActive ? 2 : 1.2}
+                opacity={isActive ? 0.6 : 0.25}
+                style={{ transition: "all 0.4s ease" }}
               />
-              {/* Core dot */}
+
+              {/* Core */}
               <circle
-                r={isActive ? 5.5 : 3.5}
+                r={isActive ? 4.5 : 3}
                 fill="#B8860B"
-                style={{ transition: "all 0.35s ease", cursor: "pointer" }}
+                filter={isActive ? "url(#marker-shadow)" : "none"}
+                style={{ transition: "all 0.3s ease", cursor: "pointer" }}
               />
-              {/* Inner highlight */}
+
+              {/* Highlight */}
               <circle
-                r={isActive ? 2 : 1.2}
-                fill="white"
-                opacity={0.7}
-                style={{ transition: "all 0.35s ease" }}
+                r={isActive ? 1.5 : 1}
+                fill="#FFFFFF"
+                opacity={0.85}
+                style={{ transition: "all 0.3s ease" }}
               />
             </Marker>
           );
         })}
 
-        {/* India — prominent hub marker */}
-        <Marker coordinates={INDIA_COORDS}>
-          <circle r={24} fill="#B8860B" opacity={0.04} />
-          <circle r={17} fill="#B8860B" opacity={0.07} />
-          <circle r={10} fill="#B8860B" opacity={1} />
-          <circle r={4.5} fill="white" opacity={0.8} />
+        {/* India — main hub marker */}
+        <Marker coordinates={INDIA}>
+          {/* Glow background */}
+          <circle r={30} fill="url(#india-glow)" />
+          <circle r={20} fill="url(#india-glow)" opacity={0.6} />
+
+          {/* Outer ring */}
+          <circle
+            r={12}
+            fill="none"
+            stroke="#B8860B"
+            strokeWidth={2}
+            opacity={0.25}
+          />
+
+          {/* Core */}
+          <circle r={7} fill="#B8860B" />
+
+          {/* Inner highlight */}
+          <circle r={2.5} fill="#FFFFFF" opacity={0.85} />
         </Marker>
 
         {/* India label */}
-        <Marker coordinates={INDIA_COORDS}>
+        <Marker coordinates={INDIA}>
           <text
-            y={-24}
+            y={-18}
             textAnchor="middle"
             fill="#B8860B"
-            fontSize={9}
+            fontSize={8}
             fontWeight="700"
             fontFamily="'Cinzel', serif"
-            letterSpacing="2.5"
+            letterSpacing="3"
+            style={{ textShadow: "0 1px 3px rgba(255,255,255,0.8)" }}
           >
             {IndiaLabel}
           </text>
         </Marker>
 
-        {/* Region labels (optional) */}
-        {showLabels &&
-          regions.map((region) => (
-            <Marker key={`label-${region.name}`} coordinates={region.coordinates}>
-              <text
-                y={-16}
-                textAnchor="middle"
-                fill="#374151"
-                fontSize={7}
-                fontWeight="600"
-                fontFamily="'Inter', sans-serif"
-              >
-                {region.label || region.name}
-              </text>
-            </Marker>
-          ))}
+        {/* SVG Tooltips (positioned correctly via projection) */}
+        {showTooltips &&
+          regions.map((region) => {
+            const isActive = activeRegion === region.name || hoveredRegion === region.name;
+            if (!isActive) return null;
+            return (
+              <Marker key={`tip-${region.name}`} coordinates={region.coordinates}>
+                <g transform="translate(14, -32)">
+                  {/* Tooltip card */}
+                  <rect
+                    x={0}
+                    y={0}
+                    width={140}
+                    height={40}
+                    rx={8}
+                    fill="#FFFFFF"
+                    stroke="#E5E7EB"
+                    strokeWidth={1}
+                    filter="url(#tooltip-shadow)"
+                  />
+                  {/* Gold accent bar */}
+                  <rect
+                    x={0}
+                    y={0}
+                    width={3}
+                    height={40}
+                    rx={1.5}
+                    fill="#B8860B"
+                  />
+                  {/* Text */}
+                  <text
+                    x={14}
+                    y={17}
+                    fill="#111827"
+                    fontSize={9}
+                    fontWeight="700"
+                    fontFamily="'Inter', sans-serif"
+                  >
+                    {region.name}
+                  </text>
+                  <text
+                    x={14}
+                    y={30}
+                    fill="#6B7280"
+                    fontSize={7}
+                    fontFamily="'Inter', sans-serif"
+                  >
+                    {region.sublabel || ""}
+                  </text>
+                </g>
+              </Marker>
+            );
+          })}
       </ComposableMap>
-
-      {/* HTML Tooltip overlay */}
-      {showTooltips &&
-        tooltipRegion &&
-        (() => {
-          const region = regions.find((r) => r.name === tooltipRegion);
-          if (!region) return null;
-
-          // Convert lat/lng to percentage positions for the tooltip
-          const leftPct = ((region.coordinates[0] + 180) / 360) * 100;
-          const topPct = ((90 - region.coordinates[1]) / 180) * 100;
-
-          return (
-            <div
-              className="absolute z-20 pointer-events-none"
-              style={{
-                left: `${leftPct}%`,
-                top: `${topPct}%`,
-                transform: "translate(-50%, -130%)",
-              }}
-            >
-              <div className="bg-white rounded-xl border border-gray-200 px-5 py-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.08)] min-w-[160px]">
-                <div className="text-gray-900 font-bold text-sm mb-0.5">
-                  {region.name}
-                </div>
-                {region.sublabel && (
-                  <div className="text-gray-500 text-xs leading-relaxed">
-                    {region.sublabel}
-                  </div>
-                )}
-              </div>
-              {/* Tooltip arrow */}
-              <div
-                className="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-3 h-3 bg-white border-r border-b border-gray-200 rotate-45"
-              />
-            </div>
-          );
-        })()}
     </div>
   );
 }

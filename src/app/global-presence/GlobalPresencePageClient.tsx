@@ -10,16 +10,15 @@ import { Globe2, MapPin, Package, Users } from "lucide-react";
 
 const regions: (MapRegion & {
   countries: string[];
-  delay: number;
   projects: string;
   keyMarkets: string;
 })[] = [
-  { name: "North America", coordinates: [-100, 45], countries: ["USA", "Canada", "Mexico"], delay: 0.4, projects: "150+", keyMarkets: "New York, Toronto, Mexico City", sublabel: "150+ Projects" },
-  { name: "Europe", coordinates: [10, 50], countries: ["UK", "Germany", "Italy", "Spain", "France"], delay: 0.5, projects: "200+", keyMarkets: "London, Milan, Berlin, Paris", sublabel: "200+ Projects" },
-  { name: "Middle East", coordinates: [45, 25], countries: ["UAE", "Saudi Arabia", "Oman", "Qatar"], delay: 0.6, projects: "300+", keyMarkets: "Dubai, Riyadh, Doha", sublabel: "300+ Projects" },
-  { name: "East Asia", coordinates: [115, 35], countries: ["China", "Japan", "South Korea"], delay: 0.7, projects: "120+", keyMarkets: "Shanghai, Tokyo, Seoul", sublabel: "120+ Projects" },
-  { name: "Southeast Asia", coordinates: [105, 10], countries: ["Singapore", "Thailand", "Vietnam"], delay: 0.8, projects: "80+", keyMarkets: "Singapore, Bangkok, Ho Chi Minh", sublabel: "80+ Projects" },
-  { name: "Africa", coordinates: [20, 0], countries: ["South Africa", "Kenya", "Nigeria"], delay: 0.9, projects: "60+", keyMarkets: "Johannesburg, Nairobi, Lagos", sublabel: "60+ Projects" },
+  { name: "North America", coordinates: [-100, 45], countries: ["USA", "Canada", "Mexico"], projects: "150+", keyMarkets: "New York, Toronto, Mexico City", sublabel: "150+ Projects" },
+  { name: "Europe", coordinates: [10, 50], countries: ["UK", "Germany", "Italy", "Spain", "France"], projects: "200+", keyMarkets: "London, Milan, Berlin, Paris", sublabel: "200+ Projects" },
+  { name: "Middle East", coordinates: [48, 28], countries: ["UAE", "Saudi Arabia", "Oman", "Qatar"], projects: "300+", keyMarkets: "Dubai, Riyadh, Doha", sublabel: "300+ Projects" },
+  { name: "East Asia", coordinates: [115, 35], countries: ["China", "Japan", "South Korea"], projects: "120+", keyMarkets: "Shanghai, Tokyo, Seoul", sublabel: "120+ Projects" },
+  { name: "Southeast Asia", coordinates: [105, 8], countries: ["Singapore", "Thailand", "Vietnam"], projects: "80+", keyMarkets: "Singapore, Bangkok, Ho Chi Minh", sublabel: "80+ Projects" },
+  { name: "Africa", coordinates: [22, -2], countries: ["South Africa", "Kenya", "Nigeria"], projects: "60+", keyMarkets: "Johannesburg, Nairobi, Lagos", sublabel: "60+ Projects" },
 ];
 
 const stats = [
@@ -81,20 +80,13 @@ export function GlobalPresencePageClient() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative bg-white rounded-3xl border border-[#E5E7EB] overflow-hidden shadow-sm mb-14"
+            className="relative bg-white rounded-3xl border border-[#E5E7EB] overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.04)] mb-14"
           >
-            <div className="absolute inset-0 pointer-events-none z-10">
-              <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-white to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent" />
-              <div className="absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-white to-transparent" />
-              <div className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" />
-            </div>
-
             <WorldMap
               regions={regions}
               activeRegion={activeRegion}
               onRegionHover={setActiveRegion}
-              height="500px"
+              height="540px"
             />
           </motion.div>
 
