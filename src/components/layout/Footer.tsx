@@ -64,10 +64,10 @@ export function Footer() {
               <div className="flex items-center gap-3 text-[#6B7280]">
                 <Mail className="w-4 h-4 text-[#B8860B] shrink-0" />
                 <a
-                  href="mailto:info@sundaramgranites.com"
+                  href="mailto:Sundaramgranites.krishnagiri@gmail.com"
                   className="hover:text-[#1A1A1A] transition-colors duration-200"
                 >
-                  info@sundaramgranites.com
+                  Sundaramgranites.krishnagiri@gmail.com
                 </a>
               </div>
             </div>

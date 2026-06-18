@@ -34,7 +34,7 @@ const contactCards = [
   {
     icon: Mail,
     title: "Email",
-    lines: ["info@sundaramgranites.com"],
+    lines: ["Sundaramgranites.krishnagiri@gmail.com"],
   },
   {
     icon: MessageCircle,
