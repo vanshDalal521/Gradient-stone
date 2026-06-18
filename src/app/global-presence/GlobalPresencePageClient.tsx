@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { WorldMap } from "@/components/ui/WorldMap";
+import { WorldMap } from "@/components/ui/WorldMap.client";
 import type { MapRegion } from "@/components/ui/WorldMap";
 import { Globe2, MapPin, Package, Users } from "lucide-react";
 

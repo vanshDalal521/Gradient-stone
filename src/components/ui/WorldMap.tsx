@@ -11,7 +11,7 @@ import {
 } from "react-simple-maps";
 
 const GEO_URL =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 export interface MapRegion {
   name: string;
