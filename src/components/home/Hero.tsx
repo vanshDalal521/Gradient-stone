@@ -12,64 +12,46 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.9]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[70vh] flex items-center overflow-hidden pt-28 pb-20">
+    <section
+      ref={sectionRef}
+      className="relative min-h-[85vh] flex items-end pb-24 overflow-hidden"
+    >
       {/* Parallax Background — Showroom Image */}
-      <motion.div style={{ y: backgroundY }} className="absolute inset-0 -top-32 -bottom-32">
-        <motion.div
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/images/site/showroom.jpg"
-            alt="Sundaram Granites Showroom"
-            fill
-            className="object-cover object-center"
-            priority
-            sizes="100vw"
-          />
-        </motion.div>
+      <motion.div
+        style={{ y: backgroundY }}
+        className="absolute inset-0 -top-32 -bottom-32"
+      >
+        <Image
+          src="/images/site/showroom.jpg"
+          alt="Sundaram Granites Showroom"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
       </motion.div>
 
-      {/* Gradient overlays for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40" />
-
-      {/* Subtle gold accent orb */}
-      <motion.div
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[10%] right-[10%] w-[400px] h-[400px] bg-luxury-gold/[0.04] rounded-full blur-[80px] pointer-events-none"
-      />
+      {/* Subtle overlays for text readability — image stays visible */}
+      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-transparent" />
 
       {/* Content */}
-      <motion.div style={{ y: textY, opacity, scale }} className="relative z-10 max-w-[1400px] mx-auto px-6 w-full">
-        <div className="max-w-4xl">
-          {/* Label */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="inline-flex items-center gap-3 px-6 py-2.5 glass-gold rounded-full text-luxury-gold text-[11px] tracking-[0.3em] uppercase font-medium mb-8">
-              <span className="w-2 h-2 bg-luxury-gold rounded-full animate-[glow-pulse_2s_ease-in-out_infinite]" />
-              Since 2007 — Premium Stone Excellence
-            </span>
-          </motion.div>
-
+      <motion.div
+        style={{ y: textY, opacity }}
+        className="relative z-10 max-w-[1400px] mx-auto px-6 w-full"
+      >
+        <div className="max-w-3xl">
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-6"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-6"
           >
             Crafted by Nature.
             <br />
@@ -78,37 +60,45 @@ export function Hero() {
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
+          {/* Subtitle — ONE short sentence */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-muted text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl mb-10"
+            transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-muted text-lg md:text-xl leading-relaxed max-w-xl mb-10"
           >
-            India&apos;s premier granite manufacturer and exporter. ISO certified
-            quality, global presence, and 18+ years of unwavering excellence.
+            Premium granite, sourced from India&apos;s finest quarries, delivered worldwide.
           </motion.p>
 
-          {/* CTAs */}
+          {/* Two clean CTA buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap gap-5"
+            transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap gap-4"
           >
             <Link
               href="/collection"
-              className="group relative px-8 py-4 bg-gradient-to-r from-luxury-gold to-luxury-gold-dark text-granite-black font-bold text-base rounded-2xl transition-all duration-500 hover:shadow-[0_0_50px_rgba(200,155,60,0.35)] hover:scale-105 active:scale-95 flex items-center gap-3 overflow-hidden"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background font-semibold text-base rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-[0.98]"
             >
-              <span className="relative z-10">Explore Collection</span>
-              <svg className="w-5 h-5 relative z-10 transition-transform duration-500 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              Explore Collection
+              <svg
+                className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
-              <div className="absolute inset-0 bg-gradient-to-r from-luxury-gold-dark to-luxury-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-4 border-2 border-foreground/20 text-foreground font-bold text-base rounded-2xl transition-all duration-500 hover:bg-white/[0.05] hover:border-luxury-gold/40 hover:shadow-[0_0_30px_rgba(200,155,60,0.1)] active:scale-95"
+              className="inline-flex items-center gap-2 px-8 py-4 border border-border text-foreground font-semibold text-base rounded-xl transition-all duration-300 hover:bg-surface hover:border-luxury-gold/40 active:scale-[0.98]"
             >
               Request Quote
             </Link>
@@ -120,21 +110,21 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-10 right-6 flex flex-col items-center gap-3"
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-muted text-[10px] tracking-[0.3em] uppercase rotate-90 origin-center mb-12">
+        <span className="text-muted text-[10px] tracking-[0.3em] uppercase mb-1">
           Scroll
         </span>
         <motion.div
-          animate={{ y: [0, 12, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-7 h-12 rounded-full border-2 border-foreground/20 flex items-start justify-center pt-2.5"
+          className="w-6 h-10 rounded-full border border-border flex items-start justify-center pt-2.5"
         >
           <motion.div
-            animate={{ opacity: [1, 0.2, 1], scaleY: [1, 0.4, 1] }}
+            animate={{ opacity: [1, 0.3, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1.5 h-3 bg-luxury-gold rounded-full"
+            className="w-1 h-2 bg-luxury-gold rounded-full"
           />
         </motion.div>
       </motion.div>
