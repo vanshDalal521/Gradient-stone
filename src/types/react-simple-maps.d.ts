@@ -60,7 +60,9 @@ declare module "react-simple-maps" {
     stroke?: string;
     strokeWidth?: number;
     fill?: string;
+    step?: [number, number];
     className?: string;
+    [key: string]: any;
   }
 
   export const ComposableMap: ComponentType<ComposableMapProps>;
