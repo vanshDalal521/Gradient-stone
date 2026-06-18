@@ -39,10 +39,10 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-white border-b border-gray-100 shadow-sm py-3"
-            : "bg-transparent py-5"
+            ? "bg-white/70 backdrop-blur-xl backdrop-saturate-[1.8] border-b border-white/20 shadow-[0_1px_15px_rgba(0,0,0,0.04)] py-3"
+            : "bg-white/10 backdrop-blur-lg backdrop-saturate-[1.5] border-b border-white/10 py-5"
         )}
       >
         <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between">
@@ -98,7 +98,12 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/contact"
-              className="px-6 py-2.5 text-[13px] font-semibold bg-[#B8860B] text-white rounded-xl transition-all duration-300 hover:bg-[#9A7209] hover:shadow-md hover:shadow-[#B8860B]/20 active:scale-[0.97]"
+              className={cn(
+                "px-6 py-2.5 text-[13px] font-semibold rounded-xl transition-all duration-300 active:scale-[0.97]",
+                isScrolled
+                  ? "bg-[#B8860B] text-white hover:bg-[#9A7209] hover:shadow-md hover:shadow-[#B8860B]/20"
+                  : "bg-white/15 backdrop-blur-sm text-white border border-white/25 hover:bg-white/25"
+              )}
             >
               Get Quote
             </Link>
@@ -107,7 +112,12 @@ export function Navbar() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center"
+            className={cn(
+              "lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-300",
+              isScrolled
+                ? "text-[#1A1A1A]"
+                : "text-white"
+            )}
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait">
@@ -119,7 +129,7 @@ export function Navbar() {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X className="w-6 h-6 text-[#1A1A1A]" />
+                  <X className="w-6 h-6" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -129,7 +139,7 @@ export function Navbar() {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu className={cn("w-6 h-6", isScrolled ? "text-[#1A1A1A]" : "text-white")} />
+                  <Menu className="w-6 h-6" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -137,7 +147,7 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu — Full screen overlay */}
+      {/* Mobile Menu — Glassmorphism overlay */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -145,9 +155,12 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden bg-white"
+            className="fixed inset-0 z-40 lg:hidden"
           >
-            <nav className="flex flex-col items-center justify-center h-full gap-2">
+            {/* Frosted backdrop */}
+            <div className="absolute inset-0 bg-white/70 backdrop-blur-2xl backdrop-saturate-[1.8]" />
+            {/* Content */}
+            <nav className="relative flex flex-col items-center justify-center h-full gap-2">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -177,7 +190,7 @@ export function Navbar() {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex px-10 py-4 text-base font-semibold bg-[#B8860B] text-white rounded-xl"
+                  className="inline-flex px-10 py-4 text-base font-semibold bg-[#B8860B] text-white rounded-xl hover:bg-[#9A7209] transition-all duration-300"
                 >
                   Get Quote
                 </Link>
