@@ -19,9 +19,9 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[85vh] flex items-end pb-24 overflow-hidden"
+      className="relative min-h-screen flex items-end pb-20 overflow-hidden"
     >
-      {/* Parallax Background — Showroom Image */}
+      {/* Parallax Background */}
       <motion.div
         style={{ y: backgroundY }}
         className="absolute inset-0 -top-32 -bottom-32"
@@ -36,9 +36,9 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* Subtle overlays for text readability — image stays visible */}
-      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-transparent" />
+      {/* Dark gradient for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
 
       {/* Content */}
       <motion.div
@@ -46,40 +46,47 @@ export function Hero() {
         className="relative z-10 max-w-[1400px] mx-auto px-6 w-full"
       >
         <div className="max-w-3xl">
+          {/* Gold accent line */}
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: 60 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="h-[2px] bg-[#B8860B] mb-8"
+          />
+
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-6"
+            className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6"
           >
             Crafted by Nature.
             <br />
-            <span className="text-gradient-gold-animated">
+            <span className="text-[#B8860B]">
               Perfected by Sundaram.
             </span>
           </motion.h1>
 
-          {/* Subtitle — ONE short sentence */}
+          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-muted text-lg md:text-xl leading-relaxed max-w-xl mb-10"
+            className="text-white/80 text-lg md:text-xl leading-relaxed max-w-xl mb-10"
           >
             Premium granite, sourced from India&apos;s finest quarries, delivered worldwide.
           </motion.p>
 
-          {/* Two clean CTA buttons */}
+          {/* Single CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap gap-4"
           >
             <Link
               href="/collection"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background font-semibold text-base rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-[0.98]"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-[#B8860B] text-white font-semibold text-base rounded-xl transition-all duration-300 hover:bg-[#9A7209] hover:shadow-lg active:scale-[0.98]"
             >
               Explore Collection
               <svg
@@ -96,37 +103,8 @@ export function Hero() {
                 />
               </svg>
             </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-border text-foreground font-semibold text-base rounded-xl transition-all duration-300 hover:bg-surface hover:border-luxury-gold/40 active:scale-[0.98]"
-            >
-              Request Quote
-            </Link>
           </motion.div>
         </div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-muted text-[10px] tracking-[0.3em] uppercase mb-1">
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 rounded-full border border-border flex items-start justify-center pt-2.5"
-        >
-          <motion.div
-            animate={{ opacity: [1, 0.3, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1 h-2 bg-luxury-gold rounded-full"
-          />
-        </motion.div>
       </motion.div>
     </section>
   );

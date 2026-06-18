@@ -1,86 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Download, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function ContactCTA() {
   return (
-    <section className="section-padding relative overflow-hidden bg-[#F9FAFB]">
-      <div className="max-w-[1400px] mx-auto px-6 relative">
+    <section className="relative py-28 bg-[#1A1A1A]">
+      <div className="max-w-[1400px] mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center"
         >
-          <motion.span
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="inline-block text-[#B8860B] font-[family-name:var(--font-cinzel)] text-[11px] tracking-[0.4em] uppercase mb-4"
-          >
-            Get Started
-          </motion.span>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl font-bold text-[#1A1A1A] leading-[1.1] mb-6 max-w-3xl mx-auto text-balance"
-          >
-            Ready to Source
-            <br />
-            <span className="text-[#B8860B]">Premium Indian Granite?</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-[#6B7280] text-lg max-w-2xl mx-auto mb-10"
-          >
-            Whether you're an architect, builder, developer, or importer —
-            let's discuss your project and find the perfect granite.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
+          <p className="text-[#B8860B] text-sm font-semibold tracking-widest uppercase mb-4">
+            Get in Touch
+          </p>
+          <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-5xl font-bold text-white leading-tight max-w-2xl mx-auto">
+            Ready to Transform Your Space?
+          </h2>
+          <p className="mt-6 text-white/60 text-lg max-w-xl mx-auto">
+            Tell us about your project and we&apos;ll get back to you within 24 hours.
+          </p>
+          <div className="mt-10">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-[#B8860B] text-white font-bold text-lg rounded-2xl transition-all duration-400 hover:bg-[#9A7209] hover:shadow-lg"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-[#B8860B] text-white font-semibold text-base rounded-xl transition-all duration-300 hover:bg-[#9A7209] hover:shadow-lg hover:shadow-[#B8860B]/20 active:scale-[0.98]"
             >
-              <span>Contact Us</span>
-              <ArrowRight className="w-5 h-5 transition-transform duration-400 group-hover:translate-x-2" />
+              Contact Us
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
-
-            <a
-              href="https://wa.me/919876543210"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-[#25D366]/25 text-[#25D366] font-bold text-lg rounded-2xl transition-all duration-400 hover:bg-[#25D366]/10"
-            >
-              <MessageCircle className="w-5 h-5 transition-transform duration-400 group-hover:scale-110" />
-              WhatsApp
-            </a>
-
-            <Link
-              href="/resources"
-              className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-[#E5E7EB] text-[#1A1A1A] font-bold text-lg rounded-2xl transition-all duration-400 hover:border-[#B8860B]/30 hover:bg-white"
-            >
-              <Download className="w-5 h-5 transition-transform duration-400 group-hover:-translate-y-1" />
-              Download Catalogue
-            </Link>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

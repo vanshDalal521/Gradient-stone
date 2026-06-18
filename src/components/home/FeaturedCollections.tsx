@@ -1,90 +1,78 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { collections } from "@/lib/data/granites";
-import { ArrowUpRight } from "lucide-react";
 
-function CollectionCard({ collection, index }: { collection: typeof collections[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <Link
-        href={`/collection?color=${encodeURIComponent(collection.name)}`}
-        className="group block relative rounded-2xl overflow-hidden aspect-[4/3] border border-[#E5E7EB] hover:shadow-xl transition-shadow duration-500"
-      >
-        <div className="absolute inset-0">
-          <Image
-            src={collection.image}
-            alt={`${collection.name} Granite Collection`}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-        </div>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-
-        <div className="absolute inset-0 flex flex-col justify-end p-8">
-          <div className="flex items-end justify-between">
-            <div>
-              <span className="text-[#B8860B] text-[10px] tracking-[0.3em] uppercase font-bold block mb-2">
-                {collection.count} Varieties
-              </span>
-              <h3 className="text-white font-[family-name:var(--font-playfair)] text-3xl font-bold">
-                {collection.name}
-              </h3>
-              <p className="text-white/70 text-sm mt-2 max-w-[220px]">
-                {collection.description}
-              </p>
-            </div>
-            <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center transition-all duration-500 group-hover:bg-[#B8860B] group-hover:border-[#B8860B] shrink-0">
-              <ArrowUpRight className="w-5 h-5 text-white transition-transform duration-500 group-hover:rotate-45 group-hover:text-white" />
-            </div>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
+const collections = [
+  {
+    id: "black-granites",
+    title: "Black Granites",
+    varieties: "25+ Varieties",
+    image: "/images/granites/black-granit.jpg",
+  },
+  {
+    id: "white-granites",
+    title: "White Granites",
+    varieties: "20+ Varieties",
+    image: "/images/granites/venus-white.jpg",
+  },
+  {
+    id: "brown-granites",
+    title: "Brown Granites",
+    varieties: "15+ Varieties",
+    image: "/images/granites/brown.jpg",
+  },
+];
 
 export function FeaturedCollections() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section className="section-padding relative overflow-hidden bg-[#F9FAFB]">
-      <div className="max-w-[1400px] mx-auto px-6 relative">
+    <section ref={ref} className="relative py-28 bg-white">
+      <div className="max-w-[1400px] mx-auto px-6">
         <SectionHeading
-          label="Our Collections"
-          title="Explore Premium Granite"
-          description="Discover our curated collections of India's finest granite, handpicked from the best quarries across the subcontinent."
+          label="Products"
+          title="Our Collections"
+          description="From jet blacks to pristine whites, discover granite that defines elegance."
+          align="center"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {collections.map((collection, i) => (
-            <CollectionCard key={collection.name} collection={collection} index={i} />
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {collections.map((col, i) => (
+            <motion.div
+              key={col.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link
+                href={`/collection?category=${col.id}`}
+                className="group block relative aspect-[3/4] overflow-hidden rounded-2xl bg-gray-100"
+              >
+                <Image
+                  src={col.image}
+                  alt={col.title}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                {/* Text */}
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-white mb-1">
+                    {col.title}
+                  </h3>
+                  <p className="text-white/70 text-sm font-medium">{col.varieties}</p>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-center mt-14"
-        >
-          <Link
-            href="/collection"
-            className="group inline-flex items-center gap-3 px-10 py-5 border-2 border-[#B8860B]/25 text-[#B8860B] font-bold text-lg rounded-2xl transition-all duration-400 hover:bg-[#B8860B]/10 hover:border-[#B8860B]/50"
-          >
-            View All Granites
-            <ArrowUpRight className="w-5 h-5 transition-transform duration-400 group-hover:rotate-45 group-hover:scale-110" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

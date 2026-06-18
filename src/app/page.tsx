@@ -14,11 +14,9 @@ export default function Home() {
       <Hero />
       <Marquee />
       <AboutPreview />
-      <WhySundaram />
-      <Marquee reverse />
       <FeaturedCollections />
+      <WhySundaram />
       <ManufacturingPreview />
-      <Marquee />
       <GlobalPresencePreview />
       <Testimonials />
       <ContactCTA />
