@@ -1,47 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 import { motion } from "framer-motion";
+import { ComposableMap, Geographies, Geography, Marker, Line, Sphere, Graticule } from "react-simple-maps";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
-// Dot-matrix world map — each row is a string where "1" = land, "0" = water
-// Equirectangular projection, 36 cols x 18 rows
-const worldMap = [
-  "000000000001100000000000000001100000",  // row 0  (far north)
-  "000011000011110000000000000111110000",  // row 1
-  "000111100111111000110000011111111000",  // row 2
-  "001111111111111111111000111111111100",  // row 3
-  "001111111111111111111101111111111110",  // row 4
-  "011111111111111111111111111111111110",  // row 5
-  "011111111111111111111111111111111110",  // row 6
-  "001111111111111111111111111111111100",  // row 7
-  "000111111111111111111111111111111000",  // row 8
-  "000011111111111111111111111111110000",  // row 9
-  "000001111111111111111111111111100000",  // row 10
-  "000000111111111111111111111111000000",  // row 11
-  "000000011111111111111111111110000000",  // row 12
-  "000000001111111111111111111100000000",  // row 13
-  "000000000111111111111111111000000000",  // row 14
-  "000000000011111111111111110000000000",  // row 15
-  "000000000001111111111111100000000000",  // row 16
-  "000000000000111111111111000000000000",  // row 17 (far south)
+const GEO_URL = "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+
+const regions = [
+  { name: "North America", countries: "USA, Canada, Mexico", coordinates: [-100, 45] as [number, number], projects: "150+" },
+  { name: "Europe", countries: "UK, Germany, Italy, Spain, France", coordinates: [10, 50] as [number, number], projects: "200+" },
+  { name: "Middle East", countries: "UAE, Saudi Arabia, Oman, Qatar", coordinates: [45, 25] as [number, number], projects: "300+" },
+  { name: "East Asia", countries: "China, Japan, South Korea", coordinates: [115, 35] as [number, number], projects: "120+" },
+  { name: "Southeast Asia", countries: "Singapore, Thailand, Vietnam", coordinates: [105, 10] as [number, number], projects: "80+" },
+  { name: "Africa", countries: "South Africa, Kenya, Nigeria", coordinates: [20, 0] as [number, number], projects: "60+" },
 ];
 
-const COLS = 36;
-const ROWS = 18;
-
-// Approximate dot positions for regions (col, row) in the dot grid
-const regionDots: Record<string, { col: number; row: number; name: string; countries: string }> = {
-  "North America": { col: 8, row: 4, name: "North America", countries: "USA, Canada, Mexico" },
-  "Europe": { col: 18, row: 3, name: "Europe", countries: "UK, Germany, Italy, Spain, France" },
-  "Middle East": { col: 22, row: 6, name: "Middle East", countries: "UAE, Saudi Arabia, Oman, Qatar" },
-  "East Asia": { col: 28, row: 4, name: "East Asia", countries: "China, Japan, South Korea" },
-  "Southeast Asia": { col: 27, row: 8, name: "Southeast Asia", countries: "Singapore, Thailand, Vietnam" },
-  "Africa": { col: 18, row: 9, name: "Africa", countries: "South Africa, Kenya, Nigeria" },
-};
-
-const INDIA = { col: 24, row: 6 };
+const INDIA_COORDS: [number, number] = [78, 22];
 
 const stats = [
   { number: 50, suffix: "+", label: "Countries" },
@@ -50,15 +26,39 @@ const stats = [
   { number: 98, suffix: "%", label: "Client Retention" },
 ];
 
+const GeographyItem = memo(({ geo }: { geo: any }) => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Geography
+      geography={geo}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        default: {
+          fill: hovered ? "#D1D5DB" : "#E5E7EB",
+          stroke: "#D1D5DB",
+          strokeWidth: 0.5,
+          outline: "none",
+          transition: "all 0.2s ease",
+        },
+        hover: {
+          fill: "#D1D5DB",
+          stroke: "#D1D5DB",
+          strokeWidth: 0.5,
+          outline: "none",
+        },
+        pressed: {
+          fill: "#D1D5DB",
+          outline: "none",
+        },
+      }}
+    />
+  );
+});
+GeographyItem.displayName = "GeographyItem";
+
 export function GlobalPresencePreview() {
-  const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
-
-  const dotSize = 12;
-  const gap = 3;
-  const svgWidth = COLS * (dotSize + gap);
-  const svgHeight = ROWS * (dotSize + gap);
-
-  const regions = Object.values(regionDots);
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
 
   return (
     <section className="section-padding relative overflow-hidden bg-[#F9FAFB]">
@@ -70,160 +70,116 @@ export function GlobalPresencePreview() {
         />
 
         <div className="relative bg-white rounded-3xl border border-[#E5E7EB] p-6 lg:p-10 mb-14 overflow-hidden shadow-sm">
-          <svg
-            viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-            className="w-full h-auto max-h-[400px]"
-            preserveAspectRatio="xMidYMid meet"
+          <ComposableMap
+            projection="geoMercator"
+            projectionConfig={{
+              scale: 140,
+              center: [45, 20],
+            }}
+            style={{ width: "100%", height: "auto" }}
           >
-            {/* World map dots */}
-            {worldMap.map((row, r) =>
-              row.split("").map((cell, c) => {
-                if (cell === "0") return null;
-                const x = c * (dotSize + gap) + dotSize / 2;
-                const y = r * (dotSize + gap) + dotSize / 2;
-                const isIndia = c === INDIA.col && r === INDIA.row;
-                return (
-                  <circle
-                    key={`${r}-${c}`}
-                    cx={x}
-                    cy={y}
-                    r={dotSize / 2}
-                    fill={isIndia ? "#B8860B" : "#D1D5DB"}
-                    opacity={isIndia ? 1 : 0.6}
-                  />
-                );
-              })
-            )}
+            {/* Sphere and Graticule for a polished look */}
+            <Sphere stroke="#E5E7EB" strokeWidth={0.5} fill="none" />
+            <Graticule stroke="#E5E7EB" strokeWidth={0.3} fill="none" />
 
-            {/* Connection lines from India to regions */}
-            {regions.map((region) => {
-              const x1 = INDIA.col * (dotSize + gap) + dotSize / 2;
-              const y1 = INDIA.row * (dotSize + gap) + dotSize / 2;
-              const x2 = region.col * (dotSize + gap) + dotSize / 2;
-              const y2 = region.row * (dotSize + gap) + dotSize / 2;
-              return (
-                <motion.line
-                  key={`line-${region.name}`}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
-                  stroke="#B8860B"
-                  strokeWidth="1"
-                  strokeDasharray="4,4"
-                  opacity={hoveredRegion === region.name ? 0.6 : 0.2}
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: hoveredRegion === region.name ? 0.6 : 0.2 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, ease: "easeInOut" }}
+            {/* Countries */}
+            <Geographies geography={GEO_URL}>
+              {({ geographies }) =>
+                geographies.map((geo) => <GeographyItem key={geo.rsmKey} geo={geo} />)
+              }
+            </Geographies>
+
+            {/* Connection lines from India */}
+            {regions.map((region) => (
+              <Line
+                key={`line-${region.name}`}
+                from={INDIA_COORDS}
+                to={region.coordinates}
+                stroke="#B8860B"
+                strokeWidth={1}
+                strokeDasharray="4,3"
+                strokeLinecap="round"
+                style={{
+                  opacity: activeRegion === region.name ? 0.6 : 0.25,
+                  transition: "opacity 0.3s ease",
+                }}
+              />
+            ))}
+
+            {/* Region markers */}
+            {regions.map((region) => (
+              <Marker
+                key={region.name}
+                coordinates={region.coordinates}
+                onMouseEnter={() => setActiveRegion(region.name)}
+                onMouseLeave={() => setActiveRegion(null)}
+              >
+                <circle
+                  r={activeRegion === region.name ? 8 : 5}
+                  fill="#B8860B"
+                  opacity={0.9}
+                  style={{ transition: "all 0.3s ease", cursor: "pointer" }}
                 />
-              );
-            })}
+                <circle
+                  r={activeRegion === region.name ? 14 : 10}
+                  fill="none"
+                  stroke="#B8860B"
+                  strokeWidth={1.5}
+                  opacity={activeRegion === region.name ? 0.4 : 0.2}
+                  style={{ transition: "all 0.3s ease" }}
+                />
+              </Marker>
+            ))}
 
-            {/* India marker */}
-            <circle
-              cx={INDIA.col * (dotSize + gap) + dotSize / 2}
-              cy={INDIA.row * (dotSize + gap) + dotSize / 2}
-              r={8}
-              fill="none"
-              stroke="#B8860B"
-              strokeWidth="1.5"
-              opacity={0.3}
-            />
-            <circle
-              cx={INDIA.col * (dotSize + gap) + dotSize / 2}
-              cy={INDIA.row * (dotSize + gap) + dotSize / 2}
-              r={5}
-              fill="#B8860B"
-            />
-            <text
-              x={INDIA.col * (dotSize + gap) + dotSize / 2}
-              y={INDIA.row * (dotSize + gap) + dotSize / 2 + 20}
-              textAnchor="middle"
-              fill="#B8860B"
-              fontSize="9"
-              fontWeight="bold"
-              fontFamily="Cinzel, serif"
-              letterSpacing="2"
-            >
-              INDIA
-            </text>
+            {/* India marker — larger, prominent */}
+            <Marker coordinates={INDIA_COORDS}>
+              <circle r={7} fill="#B8860B" opacity={1} />
+              <circle r={12} fill="none" stroke="#B8860B" strokeWidth={2} opacity={0.3} />
+              <circle r={18} fill="none" stroke="#B8860B" strokeWidth={1} opacity={0.1} />
+            </Marker>
 
-            {/* Region dots */}
+            {/* Region tooltips */}
             {regions.map((region) => {
-              const x = region.col * (dotSize + gap) + dotSize / 2;
-              const y = region.row * (dotSize + gap) + dotSize / 2;
-              const isActive = hoveredRegion === region.name;
+              if (activeRegion !== region.name) return null;
+              const [x, y] = region.coordinates;
               return (
-                <g
-                  key={region.name}
-                  onMouseEnter={() => setHoveredRegion(region.name)}
-                  onMouseLeave={() => setHoveredRegion(null)}
-                  className="cursor-pointer"
-                >
-                  <circle
-                    cx={x}
-                    cy={y}
-                    r={isActive ? 8 : 6}
-                    fill="none"
-                    stroke="#B8860B"
-                    strokeWidth="1.5"
-                    opacity={isActive ? 0.5 : 0.25}
-                    className="transition-all duration-300"
+                <g key={`tooltip-${region.name}`}>
+                  <rect
+                    x={x + 1}
+                    y={y - 4}
+                    width={120}
+                    height={36}
+                    rx={6}
+                    fill="white"
+                    stroke="#E5E7EB"
+                    strokeWidth={1}
+                    style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.08))" }}
                   />
-                  <circle
-                    cx={x}
-                    cy={y}
-                    r={isActive ? 4 : 3}
-                    fill="#B8860B"
-                    className="transition-all duration-300"
-                  />
-                  {isActive && (
-                    <g>
-                      <rect
-                        x={x - 60}
-                        y={y - 35}
-                        width="120"
-                        height="28"
-                        rx="6"
-                        fill="white"
-                        stroke="#E5E7EB"
-                        strokeWidth="1"
-                        filter="url(#tooltip-shadow)"
-                      />
-                      <text
-                        x={x}
-                        y={y - 22}
-                        textAnchor="middle"
-                        fill="#1A1A1A"
-                        fontSize="9"
-                        fontWeight="bold"
-                        fontFamily="Inter, sans-serif"
-                      >
-                        {region.name}
-                      </text>
-                      <text
-                        x={x}
-                        y={y - 12}
-                        textAnchor="middle"
-                        fill="#6B7280"
-                        fontSize="7"
-                        fontFamily="Inter, sans-serif"
-                      >
-                        {region.countries}
-                      </text>
-                    </g>
-                  )}
+                  <text x={x + 6} y={y + 1} fill="#1A1A1A" fontSize={8} fontWeight="bold" fontFamily="Inter, sans-serif">
+                    {region.name}
+                  </text>
+                  <text x={x + 6} y={y + 11} fill="#6B7280" fontSize={6} fontFamily="Inter, sans-serif">
+                    {region.countries}
+                  </text>
                 </g>
               );
             })}
 
-            <defs>
-              <filter id="tooltip-shadow" x="-10%" y="-10%" width="120%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.08" />
-              </filter>
-            </defs>
-          </svg>
+            {/* India label */}
+            <Marker coordinates={INDIA_COORDS}>
+              <text
+                y={-18}
+                textAnchor="middle"
+                fill="#B8860B"
+                fontSize={8}
+                fontWeight="bold"
+                fontFamily="Cinzel, serif"
+                letterSpacing={2}
+              >
+                INDIA
+              </text>
+            </Marker>
+          </ComposableMap>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
