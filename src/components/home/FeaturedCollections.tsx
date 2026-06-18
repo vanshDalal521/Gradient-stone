@@ -11,19 +11,19 @@ const collections = [
     id: "black-granites",
     title: "Black Granites",
     varieties: "25+ Varieties",
-    image: "/images/granites/black-granit.jpg",
+    image: "/images/granites/Pearl black.png",
   },
   {
     id: "white-granites",
     title: "White Granites",
     varieties: "20+ Varieties",
-    image: "/images/granites/venus-white.jpg",
+    image: "/images/granites/Moon white .png",
   },
   {
     id: "brown-granites",
     title: "Brown Granites",
     varieties: "15+ Varieties",
-    image: "/images/granites/brown.jpg",
+    image: "/images/granites/Himalayan brown .png",
   },
 ];
 
