@@ -4,71 +4,87 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const collections = [
   {
     id: "black-granites",
-    title: "Black Granites",
-    varieties: "25+ Varieties",
+    title: "Black",
     image: "/images/granites/Pearl black.png",
   },
   {
     id: "white-granites",
-    title: "White Granites",
-    varieties: "20+ Varieties",
+    title: "White",
     image: "/images/granites/Moon white .png",
   },
   {
     id: "brown-granites",
-    title: "Brown Granites",
-    varieties: "15+ Varieties",
+    title: "Brown",
     image: "/images/granites/Himalayan brown .png",
+  },
+  {
+    id: "green-granites",
+    title: "Green",
+    image: "/images/granites/Kuppam Green.png",
+  },
+  {
+    id: "blue-granites",
+    title: "Blue",
+    image: "/images/granites/Ice blue.png",
+  },
+  {
+    id: "pink-granites",
+    title: "Pink / Gold",
+    image: "/images/granites/Paradise pink .png",
   },
 ];
 
 export function FeaturedCollections() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="relative py-28 bg-white">
+    <section ref={ref} className="relative py-28 bg-[#1A1A1A]">
       <div className="max-w-[1400px] mx-auto px-6">
-        <SectionHeading
-          label="Products"
-          title="Our Collections"
-          description="From jet blacks to pristine whites, discover granite that defines elegance."
-          align="center"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block text-[#B8860B] font-[family-name:var(--font-cinzel)] text-[11px] tracking-[0.4em] uppercase mb-4">
+            Products
+          </span>
+          <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-white leading-[1.15]">
+            Our Collections
+          </h2>
+        </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 md:gap-10">
           {collections.map((col, i) => (
             <motion.div
               key={col.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href={`/collection?category=${col.id}`}
-                className="group block relative aspect-[3/4] overflow-hidden rounded-2xl bg-gray-100"
+                className="group flex flex-col items-center text-center"
               >
-                <Image
-                  src={col.image}
-                  alt={col.title}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                {/* Text */}
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-white mb-1">
-                    {col.title}
-                  </h3>
-                  <p className="text-white/70 text-sm font-medium">{col.varieties}</p>
+                {/* Circle image */}
+                <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#B8860B]/60 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(184,134,11,0.2)]">
+                  <Image
+                    src={col.image}
+                    alt={`${col.title} Granites`}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    sizes="(max-width: 768px) 33vw, (max-width: 1024px) 20vw, 14vw"
+                  />
                 </div>
+                {/* Label */}
+                <span className="mt-4 text-white/70 text-xs md:text-sm font-medium tracking-wide group-hover:text-[#B8860B] transition-colors duration-300">
+                  {col.title}
+                </span>
               </Link>
             </motion.div>
           ))}
