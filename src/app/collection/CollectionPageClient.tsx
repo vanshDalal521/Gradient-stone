@@ -88,7 +88,7 @@ export function CollectionPageClient() {
                     : "bg-surface border border-border text-muted hover:text-foreground hover:border-luxury-gold/30"
                 }`}
               >
-                All ({granites.length})
+                All
               </button>
               {allFilters.map((filter) => (
                 <button
@@ -100,7 +100,7 @@ export function CollectionPageClient() {
                       : "bg-surface border border-border text-muted hover:text-foreground hover:border-luxury-gold/30"
                   }`}
                 >
-                  {filter} ({granites.filter((g) => g.collection === filter).length})
+                  {filter}
                 </button>
               ))}
             </div>
