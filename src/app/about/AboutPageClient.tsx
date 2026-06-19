@@ -96,31 +96,26 @@ const facilities = [
   {
     name: "Unit I — Krishnagiri",
     location: "Tamil Nadu",
-    capacity: "50,000 sq.ft/month",
     specialty: "White & Premium Collections",
   },
   {
-    name: "Unit II — Bangalore",
-    location: "Karnataka",
-    capacity: "40,000 sq.ft/month",
+    name: "Unit II — Warangal",
+    location: "Telangana",
     specialty: "Black & Dark Collections",
   },
   {
-    name: "Unit III — Hyderabad",
-    location: "Telangana",
-    capacity: "35,000 sq.ft/month",
+    name: "Unit III — Shrikakulam",
+    location: "Andhra Pradesh",
     specialty: "Brown & Earth Tones",
   },
   {
-    name: "Unit IV — Chennai",
-    location: "Tamil Nadu",
-    capacity: "45,000 sq.ft/month",
+    name: "Unit IV — Jalore",
+    location: "Rajasthan",
     specialty: "Blue & Rare Collections",
   },
   {
-    name: "Unit V — Pollachi",
-    location: "Tamil Nadu",
-    capacity: "30,000 sq.ft/month",
+    name: "Unit V — Kishangarh",
+    location: "Rajasthan",
     specialty: "Green & Exotic Collections",
   },
 ];
@@ -296,7 +291,7 @@ export function AboutPageClient() {
           <SectionHeading
             label="Our Facilities"
             title="Manufacturing Excellence"
-            description="Five state-of-the-art manufacturing facilities across India."
+            description="Manufacturing units across India's premier quarrying regions. 2,00,000+ sq. ft. monthly capacity."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -314,7 +309,6 @@ export function AboutPageClient() {
                 </div>
                 <h3 className="text-foreground font-bold text-lg mb-0.5">{facility.name}</h3>
                 <div className="text-luxury-gold text-sm font-medium mb-3">{facility.location}</div>
-                <p className="text-muted text-sm">{facility.capacity}</p>
                 <p className="text-muted text-sm">{facility.specialty}</p>
               </motion.div>
             ))}
