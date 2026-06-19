@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Scissors, Truck } from "lucide-react";
+import { Search, Cog, Truck } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const steps = [
@@ -11,7 +11,7 @@ const steps = [
     description: "Handpicked from India's finest quarries",
   },
   {
-    icon: Scissors,
+    icon: Cog,
     title: "Craft",
     description: "Precision cut with advanced technology",
   },
