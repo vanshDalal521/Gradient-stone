@@ -37,8 +37,8 @@ export function Hero() {
       </motion.div>
 
       {/* Dark gradient for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
 
       {/* Content */}
       <motion.div
@@ -63,7 +63,7 @@ export function Hero() {
           >
             Crafted by Nature.
             <br />
-            <span className="text-[#B8860B]">
+            <span className="text-[#F0C75E]" style={{ textShadow: "0 2px 20px rgba(240,199,94,0.4)" }}>
               Perfected by Sundaram.
             </span>
           </motion.h1>
