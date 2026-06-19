@@ -7,7 +7,7 @@ const stats = [
   { number: "18+", label: "Years of Expertise" },
   { number: "40+", label: "Countries Served" },
   { number: "30+", label: "Granite Varieties" },
-  { number: "200+", label: "Team Members" },
+  { number: "7+", label: "Manufacturing Units" },
 ];
 
 export function WhySundaram() {
