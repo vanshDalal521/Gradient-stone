@@ -18,12 +18,10 @@ const steps = [
 ];
 
 const machinery = [
-  { name: "CNC Bridge Saws", count: "6", description: "Precision cutting with automated depth control" },
-  { name: "Gang Saw Lines", count: "4", description: "Multi-blade block-to-slab cutting" },
-  { name: "Polishing Lines", count: "8", description: "Automated 16-head polishing systems" },
-  { name: "Waterjet Cutters", count: "3", description: "Intricate pattern and edge cutting" },
-  { name: "Flaming Machines", count: "2", description: "Surface texturing for outdoor use" },
-  { name: "Quality Labs", count: "2", description: "Full-spectrum material testing" },
+  { name: "Multi-blade Cutter", count: "4", description: "Multi-blade block-to-slab cutting" },
+  { name: "Line Polishing", count: "8", description: "Automated 16-head polishing systems" },
+  { name: "Edge Cutting", count: "6", description: "Precision cutting with automated depth control" },
+  { name: "Wire Saw Dressing", count: "3", description: "Diamond wire saw block dressing" },
 ];
 
 export function ManufacturingPageClient() {
