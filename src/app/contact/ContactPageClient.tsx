@@ -29,7 +29,7 @@ const contactCards = [
   {
     icon: Phone,
     title: "Phone",
-    lines: ["+91 98765 43210"],
+    lines: ["+91 63635 78346"],
   },
   {
     icon: Mail,
@@ -39,7 +39,7 @@ const contactCards = [
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    lines: ["+91 98765 43210"],
+    lines: ["+91 63635 78346"],
   },
 ];
 
@@ -181,7 +181,7 @@ export function ContactPageClient() {
                     <div>
                       <h3 className="text-[#1A1A1A] font-bold mb-0.5">{card.title}</h3>
                       {card.lines.map((line, j) => (
-                        <p key={j} className="text-[#6B7280] text-sm">{line}</p>
+                        <p key={j} className="text-[#6B7280] text-sm break-all">{line}</p>
                       ))}
                     </div>
                   </div>
@@ -202,8 +202,7 @@ export function ContactPageClient() {
                   </div>
                   <div>
                     <h3 className="text-[#1A1A1A] font-bold mb-0.5">Business Hours</h3>
-                    <p className="text-[#6B7280] text-sm">Monday – Saturday: 9:00 AM – 6:00 PM</p>
-                    <p className="text-[#6B7280] text-sm">Sunday: Closed</p>
+                    <p className="text-[#6B7280] text-sm">Monday – Sunday: 9:00 AM – 6:00 PM</p>
                   </div>
                 </div>
               </motion.div>
@@ -286,7 +285,7 @@ export function ContactPageClient() {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => handleChange("phone", e.target.value)}
-                          placeholder="+91 98765 43210"
+                          placeholder="+91 63635 78346"
                           className="w-full rounded-lg bg-[#F9FAFB] border border-[#E5E7EB] px-3.5 py-2.5 text-[#1A1A1A] text-sm placeholder:text-[#6B7280]/50 focus:outline-none focus:border-[#B8860B]/40 transition-colors"
                         />
                       </div>

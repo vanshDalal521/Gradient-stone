@@ -70,11 +70,11 @@ export function Footer() {
                 Sundaramgranites.krishnagiri@gmail.com
               </a>
               <a
-                href="tel:+919787559595"
+                href="tel:+916363578346"
                 className="flex items-center gap-3 text-white/50 hover:text-[#B8860B] transition-colors text-sm"
               >
                 <Phone className="w-4 h-4" />
-                +91 97875 59595
+                +91 63635 78346
               </a>
               <div className="flex items-start gap-3 text-white/50 text-sm">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
