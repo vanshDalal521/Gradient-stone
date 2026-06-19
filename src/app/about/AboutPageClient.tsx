@@ -155,7 +155,7 @@ export function AboutPageClient() {
             transition={{ delay: 0.45 }}
             className="text-muted text-lg max-w-xl mx-auto"
           >
-            From a single quarry in South India to 50+ countries worldwide.
+            From quarries across India to 50+ countries worldwide.
           </motion.p>
         </div>
       </section>
@@ -174,7 +174,7 @@ export function AboutPageClient() {
                 Our Story
               </span>
               <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl font-bold text-foreground leading-[1.1] mb-6">
-                From South India
+                From India
                 <br />
                 <span className="text-gradient-gold">to the World</span>
               </h2>
@@ -296,7 +296,7 @@ export function AboutPageClient() {
           <SectionHeading
             label="Our Facilities"
             title="Manufacturing Excellence"
-            description="Five state-of-the-art facilities across South India."
+            description="Five state-of-the-art manufacturing facilities across India."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
