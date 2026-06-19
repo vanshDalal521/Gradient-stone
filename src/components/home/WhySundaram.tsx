@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const stats = [
   { number: "18+", label: "Years of Expertise" },
   { number: "40+", label: "Countries Served" },
-  { number: "300+", label: "Granite Varieties" },
+  { number: "30+", label: "Granite Varieties" },
   { number: "200+", label: "Team Members" },
 ];
 
