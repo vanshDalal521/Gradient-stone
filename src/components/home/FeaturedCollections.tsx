@@ -8,33 +8,28 @@ import { motion, useInView } from "framer-motion";
 const collections = [
   {
     id: "black-granites",
-    title: "Black",
+    title: "Granite",
     image: "/images/granites/Pearl black.png",
   },
   {
     id: "white-granites",
-    title: "White",
+    title: "Marble",
     image: "/images/granites/Moon white .png",
   },
   {
     id: "brown-granites",
-    title: "Brown",
+    title: "Sandstone",
     image: "/images/granites/Himalayan brown .png",
   },
   {
     id: "green-granites",
-    title: "Green",
+    title: "Slate",
     image: "/images/granites/Kuppam Green.png",
   },
   {
     id: "blue-granites",
-    title: "Blue",
+    title: "Cobbles",
     image: "/images/granites/Ice blue.png",
-  },
-  {
-    id: "pink-granites",
-    title: "Pink / Gold",
-    image: "/images/granites/Paradise pink .png",
   },
 ];
 
@@ -59,7 +54,7 @@ export function FeaturedCollections() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 md:gap-10">
+        <div className="grid grid-cols-3 md:grid-cols-5 gap-8 md:gap-10">
           {collections.map((col, i) => (
             <motion.div
               key={col.id}
@@ -75,10 +70,10 @@ export function FeaturedCollections() {
                 <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#B8860B]/60 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(184,134,11,0.2)]">
                   <Image
                     src={col.image}
-                    alt={`${col.title} Granites`}
+                    alt={col.title}
                     fill
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    sizes="(max-width: 768px) 33vw, (max-width: 1024px) 20vw, 14vw"
+                    sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
                   />
                 </div>
                 {/* Label */}
