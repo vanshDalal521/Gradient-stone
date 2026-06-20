@@ -15,6 +15,7 @@ const steps = [
     description: "Handpicked from India's finest quarries. Each block inspected for color and structural integrity.",
     details: ["Geological survey", "Block-level color matching", "Structural integrity testing", "Mineral composition analysis"],
     image: "/images/process/selection.jpg",
+    hasImage: true,
   },
   {
     icon: Pickaxe,
@@ -22,6 +23,7 @@ const steps = [
     description: "Diamond wire saws extract blocks with minimal waste. Sustainable quarrying practices.",
     details: ["Diamond wire extraction", "GPS-mapped quarry zones", "Sustainable practices", "Environmental compliance"],
     image: "/images/process/extraction.jpg",
+    hasImage: true,
   },
   {
     icon: Scissors,
@@ -29,27 +31,31 @@ const steps = [
     description: "CNC bridge saws slice blocks into slabs with ±0.5mm precision.",
     details: ["CNC bridge saw cutting", "Multi-blade gang saws", "±0.5mm tolerance", "95%+ material utilization"],
     image: "/images/process/cutting.jpg",
+    hasImage: true,
   },
   {
     icon: Cog,
     title: "Finishing",
     description: "Polished, Leather, Flamed, Honed, and Lapo finishes. Each validated for consistency.",
     details: ["5 finish varieties", "Automated polishing lines", "Consistent surface quality", "Custom finish options"],
-    image: "/images/process/finishing.jpg",
+    hasImage: false,
+    gradient: "from-amber-900 to-stone-800",
   },
   {
     icon: ShieldCheck,
     title: "Inspection",
     description: "12-point quality inspection. Only slabs meeting 99.5% threshold proceed.",
     details: ["12-point inspection", "Color consistency check", "Dimensional accuracy", "Surface defect detection"],
-    image: "/images/process/inspection.jpg",
+    hasImage: false,
+    gradient: "from-slate-800 to-zinc-700",
   },
   {
     icon: PackageCheck,
     title: "Packaging",
     description: "Export-grade crating with moisture barriers and vibration dampening.",
     details: ["ISPM-15 certified crates", "Moisture barrier lining", "Corner protection", "Vibration dampening"],
-    image: "/images/process/packaging.jpg",
+    hasImage: false,
+    gradient: "from-stone-800 to-neutral-700",
   },
 ];
 
@@ -119,15 +125,21 @@ export function ManufacturingPageClient() {
                 transition={{ delay: i * 0.08, duration: 0.5 }}
                 className="bg-white border border-border rounded-xl overflow-hidden hover-lift group"
               >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={step.image}
-                    alt={step.title}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
+                {/* Image / Gradient Header */}
+                <div className={`relative h-48 overflow-hidden ${step.hasImage ? '' : `bg-gradient-to-br ${step.gradient}`}`}>
+                  {step.hasImage ? (
+                    <Image
+                      src={step.image!}
+                      alt={step.title}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <step.icon className="w-16 h-16 text-white/10" />
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute top-3 right-4 text-[70px] font-bold text-white/10 font-[family-name:var(--font-playfair)] leading-none select-none">
                     0{i + 1}
