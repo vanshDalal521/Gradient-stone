@@ -14,14 +14,14 @@ const steps = [
     title: "Selection",
     description: "Handpicked from India's finest quarries. Each block inspected for color and structural integrity.",
     details: ["Geological survey", "Block-level color matching", "Structural integrity testing", "Mineral composition analysis"],
-    image: "/images/process/selection.jpg",
+    image: "/images/process/selection.png",
   },
   {
     icon: Pickaxe,
     title: "Extraction",
     description: "Diamond wire saws extract blocks with minimal waste. Sustainable quarrying practices.",
     details: ["Diamond wire extraction", "GPS-mapped quarry zones", "Sustainable practices", "Environmental compliance"],
-    image: "/images/process/extraction.jpg",
+    image: "/images/process/extraction.png",
   },
   {
     icon: Scissors,
@@ -35,14 +35,14 @@ const steps = [
     title: "Finishing",
     description: "Polished, Leather, Flamed, Honed, and Lapo finishes. Each validated for consistency.",
     details: ["5 finish varieties", "Automated polishing lines", "Consistent surface quality", "Custom finish options"],
-    image: "/images/process/finishing.jpg",
+    image: "/images/process/finishing.png",
   },
   {
     icon: ShieldCheck,
     title: "Inspection",
     description: "12-point quality inspection. Only slabs meeting 99.5% threshold proceed.",
     details: ["12-point inspection", "Color consistency check", "Dimensional accuracy", "Surface defect detection"],
-    image: "/images/process/inspection.jpg",
+    image: "/images/process/inspection.png",
   },
   {
     icon: PackageCheck,
