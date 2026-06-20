@@ -1,12 +1,17 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { CollectionPageClient } from "./CollectionPageClient";
 
 export const metadata: Metadata = {
-  title: "Granite Collection",
+  title: "Stone Collection | Sundaram Granites",
   description:
-    "Explore Sundaram Granites' curated collection of 30+ premium Indian granite varieties across White, Black, Brown, Green, Blue, and Pink/Gold collections.",
+    "Explore Sundaram Granites' curated collection of 50+ premium Indian granite, marble, sandstone, and cobble varieties.",
 };
 
 export default function CollectionPage() {
-  return <CollectionPageClient />;
+  return (
+    <Suspense>
+      <CollectionPageClient />
+    </Suspense>
+  );
 }
