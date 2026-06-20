@@ -54,10 +54,10 @@ const steps = [
 ];
 
 const machinery = [
-  { name: "Multi-blade Cutter", count: "4", description: "Multi-blade block-to-slab cutting", icon: Layers, gradient: "from-amber-900/90 to-amber-800/70" },
-  { name: "Line Polishing", count: "8", description: "Automated 16-head polishing systems", icon: CircleDot, gradient: "from-stone-800/90 to-stone-700/70" },
-  { name: "Edge Cutting", count: "6", description: "Precision cutting with automated depth control", icon: Maximize2, gradient: "from-zinc-800/90 to-zinc-700/70" },
-  { name: "Wire Saw Dressing", count: "3", description: "Diamond wire saw block dressing", icon: Zap, gradient: "from-neutral-800/90 to-neutral-700/70" },
+  { name: "Multi-blade Cutter", count: "4", description: "Multi-blade block-to-slab cutting", icon: Layers, image: "/images/process/machinery-multiblade.png" },
+  { name: "Line Polishing", count: "8", description: "Automated 16-head polishing systems", icon: CircleDot, image: "/images/process/machinery-polishing.png" },
+  { name: "Edge Cutting", count: "6", description: "Precision cutting with automated depth control", icon: Maximize2, image: "/images/process/machinery-edge.png" },
+  { name: "Wire Saw Dressing", count: "3", description: "Diamond wire saw block dressing", icon: Zap, image: "/images/process/machinery-wire.png" },
 ];
 
 export function ManufacturingPageClient() {
@@ -170,15 +170,25 @@ export function ManufacturingPageClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, duration: 0.5 }}
-                className="relative group rounded-xl overflow-hidden h-64 hover-lift"
+                className="relative group rounded-xl overflow-hidden h-72 hover-lift bg-white border border-border"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${m.gradient}`} />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.08),transparent_60%)]" />
-                <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
-                  <m.icon className="w-10 h-10 text-amber-400/70 mb-4 transition-transform duration-500 group-hover:scale-110" />
-                  <div className="text-4xl font-bold text-white font-[family-name:var(--font-playfair)] mb-1">{m.count}</div>
-                  <h3 className="text-white/90 font-bold text-lg mb-2">{m.name}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{m.description}</p>
+                <Image
+                  src={m.image}
+                  alt={m.name}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-9 h-9 rounded-lg bg-amber-500/90 flex items-center justify-center shadow-lg">
+                      <m.icon className="w-4.5 h-4.5 text-white" />
+                    </div>
+                    <div className="text-2xl font-bold text-white font-[family-name:var(--font-playfair)]">{m.count}</div>
+                  </div>
+                  <h3 className="text-white font-bold text-lg mb-1">{m.name}</h3>
+                  <p className="text-white/60 text-sm">{m.description}</p>
                 </div>
               </motion.div>
             ))}
