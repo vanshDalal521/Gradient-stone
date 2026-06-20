@@ -7,34 +7,41 @@ import { motion, useInView } from "framer-motion";
 
 const collections = [
   {
-    id: "black-granites",
-    title: "Black Granites",
+    id: "granite",
+    title: "Granite",
     image: "/images/granites/Pearl black.png",
+    href: "/collection",
   },
   {
-    id: "white-granites",
-    title: "White Granites",
+    id: "marble",
+    title: "Marble",
     image: "/images/granites/Moon white .png",
+    href: "/collection?filter=Marble",
   },
   {
-    id: "brown-granites",
-    title: "Brown Granites",
-    image: "/images/granites/Himalayan brown .png",
+    id: "sandstone",
+    title: "Sandstone",
+    image: "/images/granites/Tan brown .png",
+    href: "/collection?filter=Sandstone",
   },
   {
-    id: "green-granites",
-    title: "Green Granites",
+    id: "cobbles",
+    title: "Cobbles",
     image: "/images/granites/Kuppam Green.png",
+    href: "/collection?filter=Cobbles",
   },
   {
-    id: "blue-granites",
-    title: "Blue Granites",
-    image: "/images/granites/Ice blue.png",
+    id: "coming-soon",
+    title: "Coming Soon",
+    image: "",
+    href: "#",
+    empty: true,
   },
   {
-    id: "pink-gold-granites",
-    title: "Pink / Gold",
-    image: "/images/granites/Paradise pink .png",
+    id: "stone-furniture",
+    title: "Stone Furniture",
+    image: "/images/furniture/beige-round-coffee-table.png",
+    href: "/granite-furniture",
   },
 ];
 
@@ -67,25 +74,34 @@ export function FeaturedCollections() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Link
-                href="/collection"
-                className="group flex flex-col items-center text-center"
-              >
-                {/* Circle image */}
-                <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#B8860B]/60 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(184,134,11,0.2)]">
-                  <Image
-                    src={col.image}
-                    alt={col.title}
-                    fill
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
-                  />
+              {col.empty ? (
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full border-2 border-dashed border-white/10 flex items-center justify-center">
+                    <span className="text-white/20 text-xs font-medium">Soon</span>
+                  </div>
+                  <span className="mt-4 text-white/30 text-xs md:text-sm font-medium tracking-wide">
+                    {col.title}
+                  </span>
                 </div>
-                {/* Label */}
-                <span className="mt-4 text-white/70 text-xs md:text-sm font-medium tracking-wide group-hover:text-[#B8860B] transition-colors duration-300">
-                  {col.title}
-                </span>
-              </Link>
+              ) : (
+                <Link
+                  href={col.href}
+                  className="group flex flex-col items-center text-center"
+                >
+                  <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#B8860B]/60 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(184,134,11,0.2)]">
+                    <Image
+                      src={col.image}
+                      alt={col.title}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                    />
+                  </div>
+                  <span className="mt-4 text-white/70 text-xs md:text-sm font-medium tracking-wide group-hover:text-[#B8860B] transition-colors duration-300">
+                    {col.title}
+                  </span>
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>

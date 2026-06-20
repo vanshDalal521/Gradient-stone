@@ -146,6 +146,51 @@ export function CollectionDetailClient({ granite }: { granite: Granite }) {
           </div>
         </section>
       )}
+
+      {/* Granite Furniture CTA */}
+      <section className="section-padding">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative rounded-2xl overflow-hidden border border-border bg-white"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              {/* Image */}
+              <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
+                <Image
+                  src="/images/furniture/beige-round-dining-table.png"
+                  alt="Granite Furniture Collection"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              {/* Content */}
+              <div className="flex flex-col justify-center p-8 lg:p-12">
+                <span className="inline-block text-luxury-gold font-[family-name:var(--font-cinzel)] text-[11px] tracking-[0.4em] uppercase mb-4">
+                  New Collection
+                </span>
+                <h2 className="font-[family-name:var(--font-playfair)] text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+                  Explore Granite Furniture
+                </h2>
+                <p className="text-muted text-base leading-relaxed mb-8">
+                  From statement dining tables to sculptural side tables, our furniture collection transforms natural stone into functional art for your home.
+                </p>
+                <Link
+                  href="/granite-furniture"
+                  className="inline-flex items-center gap-2 self-start px-7 py-3.5 bg-luxury-gold text-white font-bold text-sm rounded-lg transition-all duration-300 hover:bg-luxury-gold-dark active:scale-95 hover:shadow-lg hover:shadow-luxury-gold/20"
+                >
+                  View Furniture Collection
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 }

@@ -1,17 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { granites, type GraniteCollection } from "@/lib/data/granites";
 import { ArrowUpRight, Search, X } from "lucide-react";
 
-const allFilters: GraniteCollection[] = ["White", "Black", "Brown", "Green", "Blue", "Pink / Gold"];
+const allFilters: GraniteCollection[] = ["White", "Black", "Brown", "Green", "Blue", "Pink / Gold", "Marble", "Sandstone", "Cobbles"];
 
 export function CollectionPageClient() {
-  const [activeFilter, setActiveFilter] = useState<GraniteCollection | "All">("All");
+  const searchParams = useSearchParams();
+  const initialFilter = searchParams.get("filter") as GraniteCollection | null;
+  const [activeFilter, setActiveFilter] = useState<GraniteCollection | "All">(initialFilter && allFilters.includes(initialFilter) ? initialFilter : "All");
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const f = searchParams.get("filter") as GraniteCollection | null;
+    if (f && allFilters.includes(f)) {
+      setActiveFilter(f);
+    }
+  }, [searchParams]);
 
   const filtered = granites.filter((g) => {
     const matchesFilter = activeFilter === "All" || g.collection === activeFilter;
@@ -40,7 +50,7 @@ export function CollectionPageClient() {
           >
             Premium Indian
             <br />
-            <span className="text-gradient-gold">Granite Collection</span>
+            <span className="text-gradient-gold">Stone Collection</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -48,7 +58,7 @@ export function CollectionPageClient() {
             transition={{ delay: 0.45 }}
             className="text-muted text-lg max-w-xl mx-auto"
           >
-            {granites.length} handpicked varieties across 6 curated collections.
+            {granites.length} handpicked varieties across 9 curated collections.
           </motion.p>
         </div>
       </section>
@@ -67,7 +77,7 @@ export function CollectionPageClient() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
               <input
                 type="text"
-                placeholder="Search granites..."
+                placeholder="Search stones..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-9 py-2.5 bg-surface border border-border rounded-lg text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-luxury-gold/40 transition-colors"
@@ -159,7 +169,7 @@ export function CollectionPageClient() {
 
           {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-muted text-lg">No granites found matching your criteria.</p>
+              <p className="text-muted text-lg">No stones found matching your criteria.</p>
               <button onClick={() => { setActiveFilter("All"); setSearchQuery(""); }} className="mt-3 text-luxury-gold font-semibold text-sm hover:underline">
                 Clear filters
               </button>

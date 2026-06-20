@@ -27,7 +27,7 @@ export function Hero() {
         className="absolute inset-0 -top-32 -bottom-32"
       >
         <Image
-          src="/images/site/showroom.jpg"
+          src="/images/site/hero.png"
           alt="Sundaram Granites Showroom"
           fill
           className="object-cover object-center"
