@@ -54,8 +54,8 @@ const steps = [
     title: "Packaging",
     description: "Export-grade crating with moisture barriers and vibration dampening.",
     details: ["ISPM-15 certified crates", "Moisture barrier lining", "Corner protection", "Vibration dampening"],
-    hasImage: false,
-    gradient: "from-stone-800 to-neutral-700",
+    image: "/images/process/packaging.jpg",
+    hasImage: true,
   },
 ];
 
