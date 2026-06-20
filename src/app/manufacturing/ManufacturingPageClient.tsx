@@ -9,12 +9,48 @@ import {
 } from "lucide-react";
 
 const steps = [
-  { icon: Eye, title: "Selection", description: "Handpicked from India's finest quarries. Each block inspected for color and structural integrity.", details: ["Geological survey", "Block-level color matching", "Structural integrity testing", "Mineral composition analysis"] },
-  { icon: Pickaxe, title: "Extraction", description: "Diamond wire saws extract blocks with minimal waste. Sustainable quarrying practices.", details: ["Diamond wire extraction", "GPS-mapped quarry zones", "Sustainable practices", "Environmental compliance"] },
-  { icon: Scissors, title: "Cutting", description: "CNC bridge saws slice blocks into slabs with ±0.5mm precision.", details: ["CNC bridge saw cutting", "Multi-blade gang saws", "±0.5mm tolerance", "95%+ material utilization"] },
-  { icon: Cog, title: "Finishing", description: "Polished, Leather, Flamed, Honed, and Lapo finishes. Each validated for consistency.", details: ["5 finish varieties", "Automated polishing lines", "Consistent surface quality", "Custom finish options"] },
-  { icon: ShieldCheck, title: "Inspection", description: "12-point quality inspection. Only slabs meeting 99.5% threshold proceed.", details: ["12-point inspection", "Color consistency check", "Dimensional accuracy", "Surface defect detection"] },
-  { icon: PackageCheck, title: "Packaging", description: "Export-grade crating with moisture barriers and vibration dampening.", details: ["ISPM-15 certified crates", "Moisture barrier lining", "Corner protection", "Vibration dampening"] },
+  {
+    icon: Eye,
+    title: "Selection",
+    description: "Handpicked from India's finest quarries. Each block inspected for color and structural integrity.",
+    details: ["Geological survey", "Block-level color matching", "Structural integrity testing", "Mineral composition analysis"],
+    image: "/images/process/selection.jpg",
+  },
+  {
+    icon: Pickaxe,
+    title: "Extraction",
+    description: "Diamond wire saws extract blocks with minimal waste. Sustainable quarrying practices.",
+    details: ["Diamond wire extraction", "GPS-mapped quarry zones", "Sustainable practices", "Environmental compliance"],
+    image: "/images/process/extraction.jpg",
+  },
+  {
+    icon: Scissors,
+    title: "Cutting",
+    description: "CNC bridge saws slice blocks into slabs with ±0.5mm precision.",
+    details: ["CNC bridge saw cutting", "Multi-blade gang saws", "±0.5mm tolerance", "95%+ material utilization"],
+    image: "/images/process/cutting.jpg",
+  },
+  {
+    icon: Cog,
+    title: "Finishing",
+    description: "Polished, Leather, Flamed, Honed, and Lapo finishes. Each validated for consistency.",
+    details: ["5 finish varieties", "Automated polishing lines", "Consistent surface quality", "Custom finish options"],
+    image: "/images/process/finishing.jpg",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Inspection",
+    description: "12-point quality inspection. Only slabs meeting 99.5% threshold proceed.",
+    details: ["12-point inspection", "Color consistency check", "Dimensional accuracy", "Surface defect detection"],
+    image: "/images/process/inspection.jpg",
+  },
+  {
+    icon: PackageCheck,
+    title: "Packaging",
+    description: "Export-grade crating with moisture barriers and vibration dampening.",
+    details: ["ISPM-15 certified crates", "Moisture barrier lining", "Corner protection", "Vibration dampening"],
+    image: "/images/process/packaging.jpg",
+  },
 ];
 
 const machinery = [
@@ -81,16 +117,31 @@ export function ManufacturingPageClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="bg-white border border-border rounded-xl p-7 hover-lift relative overflow-hidden"
+                className="bg-white border border-border rounded-xl overflow-hidden hover-lift group"
               >
-                <div className="absolute top-3 right-4 text-[70px] font-bold text-foreground/[0.03] font-[family-name:var(--font-playfair)] leading-none select-none">
-                  0{i + 1}
-                </div>
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-lg bg-luxury-gold/10 flex items-center justify-center mb-5">
-                    <step.icon className="w-5 h-5 text-luxury-gold" />
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={step.image}
+                    alt={step.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute top-3 right-4 text-[70px] font-bold text-white/10 font-[family-name:var(--font-playfair)] leading-none select-none">
+                    0{i + 1}
                   </div>
-                  <h3 className="text-foreground font-bold text-lg mb-2">{step.title}</h3>
+                  <div className="absolute bottom-4 left-5 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-[#B8860B] flex items-center justify-center shadow-lg">
+                      <step.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-white font-bold text-lg">{step.title}</h3>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-5">
                   <p className="text-muted text-sm leading-relaxed mb-4">{step.description}</p>
                   <ul className="flex flex-col gap-1.5">
                     {step.details.map((d) => (
@@ -111,7 +162,7 @@ export function ManufacturingPageClient() {
       <section className="section-padding bg-surface">
         <div className="max-w-[1400px] mx-auto px-6">
           <SectionHeading label="Technology" title="Our Machinery" description="State-of-the-art Italian and German machinery for precision processing." />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {machinery.map((m, i) => (
               <motion.div
                 key={m.name}
@@ -119,7 +170,7 @@ export function ManufacturingPageClient() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, duration: 0.5 }}
-                className="bg-white border border-border rounded-xl p-6 hover-lift"
+                className="bg-white border border-border rounded-xl p-6 hover-lift text-center"
               >
                 <div className="text-3xl font-bold text-foreground font-[family-name:var(--font-playfair)] mb-1">{m.count}</div>
                 <h3 className="text-foreground font-bold mb-1">{m.name}</h3>
