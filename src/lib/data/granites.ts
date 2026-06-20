@@ -179,7 +179,7 @@ export const granites: Granite[] = [
     name: "Kuppam Green",
     slug: "kuppam-green",
     collection: "Green",
-    description: "Kuppam Green showcases deep forest green hues with black mineral flecks. Quarried from South India, it brings nature's tranquility into architectural spaces.",
+    description: "Kuppam Green showcases deep forest green hues with black mineral flecks. Quarried from India, it brings nature's tranquility into architectural spaces.",
     image: "/images/granites/Kuppam Green.png",
     finishes: ["Polished", "Leather", "Flamed", "Honed"],
     thicknesses: ["16mm", "18mm", "20mm", "30mm"],

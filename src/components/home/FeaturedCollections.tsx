@@ -8,28 +8,33 @@ import { motion, useInView } from "framer-motion";
 const collections = [
   {
     id: "black-granites",
-    title: "Granite",
+    title: "Black Granites",
     image: "/images/granites/Pearl black.png",
   },
   {
     id: "white-granites",
-    title: "Marble",
+    title: "White Granites",
     image: "/images/granites/Moon white .png",
   },
   {
     id: "brown-granites",
-    title: "Sandstone",
+    title: "Brown Granites",
     image: "/images/granites/Himalayan brown .png",
   },
   {
     id: "green-granites",
-    title: "Slate",
+    title: "Green Granites",
     image: "/images/granites/Kuppam Green.png",
   },
   {
     id: "blue-granites",
-    title: "Cobbles",
+    title: "Blue Granites",
     image: "/images/granites/Ice blue.png",
+  },
+  {
+    id: "pink-gold-granites",
+    title: "Pink / Gold",
+    image: "/images/granites/Paradise pink .png",
   },
 ];
 
@@ -54,7 +59,7 @@ export function FeaturedCollections() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-3 md:grid-cols-5 gap-8 md:gap-10">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 md:gap-10">
           {collections.map((col, i) => (
             <motion.div
               key={col.id}
@@ -63,7 +68,7 @@ export function FeaturedCollections() {
               transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
-                href={`/collection?category=${col.id}`}
+                href="/collection"
                 className="group flex flex-col items-center text-center"
               >
                 {/* Circle image */}

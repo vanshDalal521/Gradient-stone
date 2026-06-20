@@ -65,7 +65,7 @@ export function AboutPreview() {
             transition={{ delay: 0.35, duration: 0.6 }}
             className="text-[#6B7280] text-lg leading-relaxed mb-10"
           >
-            With manufacturing units across India and exports to 40+ countries, we&apos;ve proven that quality and consistency can make Indian stone compete with the best in the world.
+            With manufacturing units across India and exports to 50+ countries, we&apos;ve proven that quality and consistency can make Indian stone compete with the best in the world.
           </motion.p>
 
           <motion.div

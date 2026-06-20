@@ -6,11 +6,12 @@ import { Marquee } from "@/components/ui/Marquee";
 
 const footerLinks = {
   Products: [
-    { label: "Black Granites", href: "/collection?category=black-granites" },
-    { label: "White Granites", href: "/collection?category=white-granites" },
-    { label: "Brown Granites", href: "/collection?category=brown-granites" },
-    { label: "Blue Granites", href: "/collection?category=blue-granites" },
-    { label: "Red Granites", href: "/collection?category=red-granites" },
+    { label: "Black Granites", href: "/collection" },
+    { label: "White Granites", href: "/collection" },
+    { label: "Brown Granites", href: "/collection" },
+    { label: "Blue Granites", href: "/collection" },
+    { label: "Green Granites", href: "/collection" },
+    { label: "Pink / Gold Granites", href: "/collection" },
   ],
   Company: [
     { label: "About Us", href: "/about" },
@@ -59,7 +60,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed max-w-sm mb-6">
-              Premium Indian granite, sourced and crafted with precision, delivered to over 40 countries worldwide.
+              Premium Indian granite, sourced and crafted with precision, delivered to over 50 countries worldwide.
             </p>
             <div className="space-y-3">
               <a
