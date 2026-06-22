@@ -946,7 +946,7 @@ export const granites: Granite[] = [
     image: "/images/sandstone/Dholpur Pink Sandstone.jpg",
     finishes: ["Natural", "Flamed", "Leather"],
     thicknesses: ["20mm", "30mm"],
-    applications: ["Flooring", "Cladding", "Landscaping"],
+    applications: ["Flooring", "Cladding", "Feature Walls"],
     specs: {
       waterAbsorption: "3.40%",
       density: "2.23 g/cm³",
@@ -964,7 +964,7 @@ export const granites: Granite[] = [
     image: "/images/sandstone/Dumka Brown Sandstone.jpg",
     finishes: ["Flamed", "Natural"],
     thicknesses: ["20mm", "30mm"],
-    applications: ["Flooring", "Cladding", "Landscaping"],
+    applications: ["Flooring", "Cladding", "Feature Walls"],
     specs: {
       waterAbsorption: "3.55%",
       density: "2.22 g/cm³",
