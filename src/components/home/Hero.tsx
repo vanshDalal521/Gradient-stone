@@ -37,8 +37,8 @@ export function Hero() {
       </motion.div>
 
       {/* Dark gradient for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
 
       {/* Content */}
       <motion.div
