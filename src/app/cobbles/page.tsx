@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { StoneCategoryClient } from "@/components/StoneCategoryClient";
+import { CobblesPageClient } from "./CobblesPageClient";
 
 export const metadata: Metadata = {
   title: "Cobbles Collection | Sundaram Granites",
@@ -8,12 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function CobblesPage() {
-  return (
-    <StoneCategoryClient
-      title="Cobbles"
-      subtitle="Rugged Beauty"
-      description="Cobbles combine rugged natural beauty with enduring strength. Ideal for driveways, pathways, patios, and landscape design, they bring character and charm to any outdoor space."
-      image="/images/granites/Kuppam Green.png"
-    />
-  );
+  return <CobblesPageClient />;
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { StoneCategoryClient } from "@/components/StoneCategoryClient";
+import { MarblePageClient } from "./MarblePageClient";
 
 export const metadata: Metadata = {
   title: "Marble Collection | Sundaram Granites",
@@ -8,12 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function MarblePage() {
-  return (
-    <StoneCategoryClient
-      title="Marble"
-      subtitle="Timeless Elegance"
-      description="Marble embodies luxury and sophistication. Its natural veining and luminous surface make it the ultimate choice for premium interiors, grand entrances, and statement surfaces."
-      image="/images/granites/Moon white .png"
-    />
-  );
+  return <MarblePageClient />;
 }
