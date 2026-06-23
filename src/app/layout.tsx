@@ -40,43 +40,41 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sundaramgranites.shop"),
+
   title: {
-    default: "Sundaram Granites — Premium Indian Granite Manufacturer & Exporter",
+    default: "Sundaram Granites | Premium Indian Granite Manufacturer & Exporter",
     template: "%s | Sundaram Granites",
   },
+
   description:
-    "Sundaram Granites is a world-class manufacturer and exporter of premium Indian granite slabs. 18+ years of experience, ISO certified, serving architects and builders globally.",
-  keywords: [
-    "granite slabs",
-    "Indian granite",
-    "granite manufacturer",
-    "granite exporter",
-    "premium granite",
-    "natural stone",
-    "Sundaram Granites",
-    "countertops",
-    "architectural stone",
-  ],
-  metadataBase: new URL("https://sundaramgranites.shop"),
+    "Sundaram Granites is a premium Indian granite manufacturer and exporter, offering high-quality granite slabs, tiles, cobbles, and natural stone products.",
+
   alternates: {
-    canonical: "/",
+    canonical: "https://sundaramgranites.shop",
   },
+
   openGraph: {
-    title: "Sundaram Granites — Premium Indian Granite Manufacturer & Exporter",
-    description: "Premium Indian granite manufacturer & exporter. 18+ years of experience, ISO certified, serving architects and builders globally.",
+    title: "Sundaram Granites | Premium Indian Granite Manufacturer & Exporter",
+    description:
+      "Premium Indian granite, sourced and crafted with precision, delivered worldwide.",
     url: "https://sundaramgranites.shop",
     siteName: "Sundaram Granites",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sundaram Granites",
+      },
+    ],
+    locale: "en_IN",
     type: "website",
-    locale: "en_US",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sundaram Granites — Premium Indian Granite Manufacturer & Exporter",
-    description: "Premium Indian granite manufacturer & exporter. 18+ years of experience, ISO certified, serving architects and builders globally.",
-  },
-  robots: {
-    index: true,
-    follow: true,
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
