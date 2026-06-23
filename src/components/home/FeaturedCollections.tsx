@@ -27,7 +27,7 @@ const collections = [
   {
     id: "cobbles",
     title: "Cobbles",
-    image: "/images/granites/Kuppam Green.png",
+    image: "/images/cobbles/Grey Granite Cobbles.jpg",
     href: "/collection?filter=Cobbles",
   },
   {
