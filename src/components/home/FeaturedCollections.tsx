@@ -31,13 +31,6 @@ const collections = [
     href: "/collection?filter=Cobbles",
   },
   {
-    id: "coming-soon",
-    title: "Coming Soon",
-    image: "",
-    href: "#",
-    empty: true,
-  },
-  {
     id: "stone-furniture",
     title: "Stone Furniture",
     image: "/images/furniture/beige-round-coffee-table.png",
