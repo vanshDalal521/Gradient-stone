@@ -57,11 +57,26 @@ export const metadata: Metadata = {
     "countertops",
     "architectural stone",
   ],
+  metadataBase: new URL("https://sundaramgranites.shop"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Sundaram Granites — Premium Indian Granite",
-    description: "World-class manufacturer and exporter of premium Indian granite slabs.",
+    title: "Sundaram Granites — Premium Indian Granite Manufacturer & Exporter",
+    description: "Premium Indian granite manufacturer & exporter. 18+ years of experience, ISO certified, serving architects and builders globally.",
+    url: "https://sundaramgranites.shop",
+    siteName: "Sundaram Granites",
     type: "website",
     locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sundaram Granites — Premium Indian Granite Manufacturer & Exporter",
+    description: "Premium Indian granite manufacturer & exporter. 18+ years of experience, ISO certified, serving architects and builders globally.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
