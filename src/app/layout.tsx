@@ -39,6 +39,32 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Sundaram Granites",
+  alternateName: ["Sundaram Granites", "Sundaram Granite"],
+  url: "https://sundaramgranites.shop",
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Sundaram Granites",
+  url: "https://sundaramgranites.shop",
+  logo: "https://sundaramgranites.shop/favicon.svg",
+  email: "Sundaramgranites.krishnagiri@gmail.com",
+  telephone: "+91 63635 78346",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "SF No. 24/1, Sathamangalam Village, Thandla Road, Pochampalli",
+    addressLocality: "Krishnagiri",
+    addressRegion: "Tamil Nadu",
+    postalCode: "635206",
+    addressCountry: "IN",
+  },
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://sundaramgranites.shop"),
 
@@ -76,6 +102,14 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     apple: "/apple-touch-icon.png",
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Sundaram Granites | Premium Indian Granite Manufacturer & Exporter",
+    description:
+      "Premium Indian granite, sourced and crafted with precision, delivered worldwide.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -93,6 +127,18 @@ export default function RootLayout({
       `}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-inter)]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <SmoothScroll>
           <CursorGlow />
           <Navbar />
