@@ -59,7 +59,7 @@ export function FeaturedCollections() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 md:gap-10">
+        <div className="grid grid-cols-3 md:grid-cols-5 gap-8 md:gap-10">
           {collections.map((col, i) => (
             <motion.div
               key={col.id}
