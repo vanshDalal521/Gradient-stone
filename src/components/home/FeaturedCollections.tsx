@@ -67,34 +67,23 @@ export function FeaturedCollections() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              {col.empty ? (
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full border-2 border-dashed border-white/10 flex items-center justify-center">
-                    <span className="text-white/20 text-xs font-medium">Soon</span>
-                  </div>
-                  <span className="mt-4 text-white/30 text-xs md:text-sm font-medium tracking-wide">
-                    {col.title}
-                  </span>
+              <Link
+                href={col.href}
+                className="group flex flex-col items-center text-center"
+              >
+                <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#B8860B]/60 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(184,134,11,0.2)]">
+                  <Image
+                    src={col.image}
+                    alt={col.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                  />
                 </div>
-              ) : (
-                <Link
-                  href={col.href}
-                  className="group flex flex-col items-center text-center"
-                >
-                  <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#B8860B]/60 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(184,134,11,0.2)]">
-                    <Image
-                      src={col.image}
-                      alt={col.title}
-                      fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                      sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
-                    />
-                  </div>
-                  <span className="mt-4 text-white/70 text-xs md:text-sm font-medium tracking-wide group-hover:text-[#B8860B] transition-colors duration-300">
-                    {col.title}
-                  </span>
-                </Link>
-              )}
+                <span className="mt-4 text-white/70 text-xs md:text-sm font-medium tracking-wide group-hover:text-[#B8860B] transition-colors duration-300">
+                  {col.title}
+                </span>
+              </Link>
             </motion.div>
           ))}
         </div>
