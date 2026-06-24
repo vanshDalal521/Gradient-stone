@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   Eye, Scissors, Cog, ShieldCheck, PackageCheck,
-  Pickaxe, CheckCircle, Layers, CircleDot, Maximize2, Zap,
+  CheckCircle, Layers, CircleDot, Maximize2, Zap,
 } from "lucide-react";
 
 const steps = [
@@ -14,50 +14,43 @@ const steps = [
     title: "Selection",
     description: "Handpicked from India's finest quarries. Each block inspected for color and structural integrity.",
     details: ["Geological survey", "Block-level color matching", "Structural integrity testing", "Mineral composition analysis"],
-    image: "/images/process/selection.png",
-  },
-  {
-    icon: Pickaxe,
-    title: "Extraction",
-    description: "Diamond wire saws extract blocks with minimal waste. Sustainable quarrying practices.",
-    details: ["Diamond wire extraction", "GPS-mapped quarry zones", "Sustainable practices", "Environmental compliance"],
-    image: "/images/process/extraction.png",
+    image: "/images/manufacturing/Selection.jpg",
   },
   {
     icon: Scissors,
     title: "Cutting",
-    description: "CNC bridge saws slice blocks into slabs with ±0.5mm precision.",
+    description: "CNC bridge saws and multi-blade gang saws slice blocks into slabs with ±0.5mm precision.",
     details: ["CNC bridge saw cutting", "Multi-blade gang saws", "±0.5mm tolerance", "95%+ material utilization"],
-    image: "/images/process/cutting.jpg",
+    image: "/images/manufacturing/Cutting.jpg",
   },
   {
     icon: Cog,
-    title: "Finishing",
-    description: "Polished, Leather, Flamed, Honed, and Lapo finishes. Each validated for consistency.",
+    title: "Polishing",
+    description: "Automated 16-head polishing lines deliver Polished, Leather, Flamed, Honed, and Lapo finishes.",
     details: ["5 finish varieties", "Automated polishing lines", "Consistent surface quality", "Custom finish options"],
-    image: "/images/process/finishing.png",
+    image: "/images/manufacturing/Polishing.jpg",
   },
   {
     icon: ShieldCheck,
     title: "Inspection",
-    description: "12-point quality inspection. Only slabs meeting 99.5% threshold proceed.",
+    description: "12-point quality inspection. Only slabs meeting 99.5% threshold proceed to packaging.",
     details: ["12-point inspection", "Color consistency check", "Dimensional accuracy", "Surface defect detection"],
-    image: "/images/process/inspection.png",
+    image: "/images/manufacturing/Inspection.jpg",
   },
   {
     icon: PackageCheck,
     title: "Packaging",
-    description: "Export-grade crating with moisture barriers and vibration dampening.",
+    description: "Export-grade crating with moisture barriers and vibration dampening for safe global delivery.",
     details: ["ISPM-15 certified crates", "Moisture barrier lining", "Corner protection", "Vibration dampening"],
-    image: "/images/process/packaging.jpg",
+    image: "/images/manufacturing/Packaging.jpg",
   },
 ];
 
 const machinery = [
-  { name: "Multi-blade Cutter", count: "4", description: "Multi-blade block-to-slab cutting", icon: Layers, image: "/images/process/machinery-multiblade.png" },
-  { name: "Line Polishing", count: "8", description: "Automated 16-head polishing systems", icon: CircleDot, image: "/images/process/machinery-polishing.png" },
-  { name: "Edge Cutting", count: "6", description: "Precision cutting with automated depth control", icon: Maximize2, image: "/images/process/machinery-edge.png" },
-  { name: "Wire Saw Dressing", count: "3", description: "Diamond wire saw block dressing", icon: Zap, image: "/images/process/machinery-wire.png" },
+  { name: "Multi-blade Cutter", count: "4", description: "Multi-blade block-to-slab cutting", icon: Layers, image: "/images/manufacturing/Multi-blade-cutter.jpg" },
+  { name: "Line Polishing", count: "8", description: "Automated 16-head polishing systems", icon: CircleDot, image: "/images/manufacturing/Line-polishing.jpg" },
+  { name: "Edge Cutting", count: "6", description: "Precision cutting with automated depth control", icon: Maximize2, image: "/images/manufacturing/Edge-cutter.jpg" },
+  { name: "Wire Saw Dressing", count: "3", description: "Diamond wire saw block dressing", icon: Zap, image: "/images/manufacturing/Wire-saw.jpg" },
 ];
 
 export function ManufacturingPageClient() {
@@ -99,15 +92,15 @@ export function ManufacturingPageClient() {
             transition={{ delay: 0.45 }}
             className="text-white/70 text-lg max-w-xl mx-auto"
           >
-            From raw block to finished slab — six stages ensure only perfection reaches your project.
+            From raw block to finished slab — five rigorous stages ensure only perfection reaches your project.
           </motion.p>
         </div>
       </section>
 
-      {/* 6-Stage Process */}
+      {/* 5-Stage Process */}
       <section className="section-padding">
         <div className="max-w-[1400px] mx-auto px-6">
-          <SectionHeading label="Our Process" title="Six-Stage Quality" description="Every slab passes through six rigorous stages before earning the Sundaram stamp." />
+          <SectionHeading label="Our Process" title="Five-Stage Quality" description="Every slab passes through five rigorous stages before earning the Sundaram stamp." />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {steps.map((step, i) => (
