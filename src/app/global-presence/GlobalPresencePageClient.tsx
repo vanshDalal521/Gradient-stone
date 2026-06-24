@@ -74,7 +74,7 @@ export function GlobalPresencePageClient() {
       {/* Map Section */}
       <section className="section-padding">
         <div className="max-w-[1400px] mx-auto px-6">
-          <SectionHeading label="Our Reach" title="Where We Operate" description="A global network spanning 50+ countries with dedicated export teams." />
+          <SectionHeading label="Our Reach" title="Where We Operate" description="A global network spanning 40+ countries with dedicated export teams." />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

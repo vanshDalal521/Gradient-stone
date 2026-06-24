@@ -49,7 +49,7 @@ const timeline = [
     year: "2024",
     title: "Industry Leader",
     description:
-      "50+ countries, 5 manufacturing units, 200+ skilled professionals.",
+      "40+ countries, 7+ manufacturing units across 5 locations, 200+ skilled professionals.",
   },
 ];
 
@@ -70,7 +70,7 @@ const values = [
     icon: Globe2,
     title: "Global Reach",
     description:
-      "Exporting to 50+ countries with dedicated logistics teams.",
+      "Exporting to 40+ countries with dedicated logistics teams.",
   },
   {
     icon: Leaf,
@@ -150,7 +150,7 @@ export function AboutPageClient() {
             transition={{ delay: 0.45 }}
             className="text-muted text-lg max-w-xl mx-auto"
           >
-            From quarries across India to 50+ countries worldwide.
+            From quarries across India to 40+ countries worldwide.
           </motion.p>
         </div>
       </section>
@@ -181,7 +181,7 @@ export function AboutPageClient() {
                 Our founder saw that Indian granite could compete with marble from Italy or quartz from anywhere. The difference would be quality, consistency, and service.
               </p>
               <p className="text-muted text-lg leading-relaxed">
-                Today, with five manufacturing units and exports to 50+ countries, we&apos;ve proven that vision right.
+                Today, with 7+ manufacturing units across 5 locations and exports to 40+ countries, we&apos;ve proven that vision right.
               </p>
             </motion.div>
 
@@ -194,10 +194,10 @@ export function AboutPageClient() {
             >
               {[
                 { value: "2007", label: "Founded" },
-                { value: "50+", label: "Countries" },
+                { value: "40+", label: "Countries" },
                 { value: "30+", label: "Varieties" },
                 { value: "200+", label: "Team Members" },
-                { value: "5", label: "Facilities" },
+                { value: "7+", label: "Facilities" },
                 { value: "99.5%", label: "Quality Rate" },
                 { value: "200K", label: "Sq.ft/Month" },
                 { value: "1000+", label: "Projects" },

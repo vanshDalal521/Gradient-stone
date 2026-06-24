@@ -25,7 +25,7 @@ export function GlobalPresencePreview() {
         <SectionHeading
           label="Global Reach"
           title="Worldwide Presence"
-          description="Trusted by clients across 50+ countries on every continent."
+          description="Trusted by clients across 40+ countries on every continent."
           align="center"
         />
 
