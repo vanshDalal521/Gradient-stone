@@ -128,6 +128,12 @@ export default function RootLayout({
       `}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-inter)]">
+        {/* CookieYes - Cookie Consent */}
+        <script
+          id="cookieyes"
+          type="text/javascript"
+          src="https://cdn-cookieyes.com/client_data/ffe59be400f718ceb95aa651/script.js"
+        />
         {/* Google tag (gtag.js) */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-QFQTS3R290" />
         <Script id="google-analytics">
