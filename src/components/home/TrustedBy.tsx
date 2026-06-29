@@ -7,10 +7,10 @@ const clients = [
     name: "Prestige Group",
     logo: (
       <svg viewBox="0 0 200 40" className="h-8 md:h-10 w-auto">
-        <text x="0" y="28" fill="currentColor" fontSize="22" fontWeight="700" fontFamily="serif" letterSpacing="1">
+        <text x="0" y="28" fill="#8B1A1A" fontSize="22" fontWeight="700" fontFamily="serif" letterSpacing="1">
           Prestige
         </text>
-        <text x="115" y="28" fill="currentColor" fontSize="22" fontWeight="300" fontFamily="serif" letterSpacing="1">
+        <text x="115" y="28" fill="#8B1A1A" fontSize="22" fontWeight="300" fontFamily="serif" letterSpacing="1">
           Group
         </text>
       </svg>
@@ -20,10 +20,10 @@ const clients = [
     name: "Larsen & Toubro",
     logo: (
       <svg viewBox="0 0 180 40" className="h-8 md:h-10 w-auto">
-        <text x="0" y="22" fill="currentColor" fontSize="16" fontWeight="700" fontFamily="sans-serif" letterSpacing="2">
+        <text x="0" y="22" fill="#003366" fontSize="16" fontWeight="700" fontFamily="sans-serif" letterSpacing="2">
           LARSEN
         </text>
-        <text x="0" y="36" fill="currentColor" fontSize="10" fontWeight="400" fontFamily="sans-serif" letterSpacing="4">
+        <text x="0" y="36" fill="#003366" fontSize="10" fontWeight="400" fontFamily="sans-serif" letterSpacing="4">
           &amp; TOUBRO
         </text>
       </svg>
@@ -37,7 +37,7 @@ const clients = [
         <text x="8" y="26" fill="white" fontSize="14" fontWeight="700" fontFamily="sans-serif">
           HDFC
         </text>
-        <text x="40" y="28" fill="currentColor" fontSize="20" fontWeight="700" fontFamily="sans-serif" letterSpacing="1">
+        <text x="40" y="28" fill="#004B8D" fontSize="20" fontWeight="700" fontFamily="sans-serif" letterSpacing="1">
           BANK
         </text>
       </svg>
@@ -47,10 +47,10 @@ const clients = [
     name: "CKS Hospital",
     logo: (
       <svg viewBox="0 0 200 40" className="h-8 md:h-10 w-auto">
-        <text x="0" y="22" fill="currentColor" fontSize="18" fontWeight="700" fontFamily="sans-serif" letterSpacing="2">
+        <text x="0" y="22" fill="#0D6E6E" fontSize="18" fontWeight="700" fontFamily="sans-serif" letterSpacing="2">
           CKS
         </text>
-        <text x="52" y="28" fill="currentColor" fontSize="14" fontWeight="400" fontFamily="sans-serif" letterSpacing="3">
+        <text x="52" y="28" fill="#0D6E6E" fontSize="14" fontWeight="400" fontFamily="sans-serif" letterSpacing="3">
           HOSPITAL
         </text>
       </svg>
@@ -60,10 +60,10 @@ const clients = [
     name: "Ramky Group",
     logo: (
       <svg viewBox="0 0 200 40" className="h-8 md:h-10 w-auto">
-        <text x="0" y="28" fill="currentColor" fontSize="22" fontWeight="700" fontFamily="sans-serif" letterSpacing="1">
+        <text x="0" y="28" fill="#1A5276" fontSize="22" fontWeight="700" fontFamily="sans-serif" letterSpacing="1">
           Ramky
         </text>
-        <text x="85" y="28" fill="currentColor" fontSize="22" fontWeight="300" fontFamily="sans-serif" letterSpacing="1">
+        <text x="85" y="28" fill="#1A5276" fontSize="22" fontWeight="300" fontFamily="sans-serif" letterSpacing="1">
           Group
         </text>
       </svg>
@@ -93,7 +93,7 @@ export function TrustedBy() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="text-gray-400 hover:text-gray-600 transition-colors duration-300 grayscale hover:grayscale-0"
+              className="hover:opacity-80 transition-opacity duration-300"
             >
               {client.logo}
             </motion.div>

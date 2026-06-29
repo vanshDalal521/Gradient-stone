@@ -21,7 +21,7 @@ const collections = [
   {
     id: "sandstone",
     title: "Sandstone",
-    image: "/images/granites/Tan brown .png",
+    image: "/images/sandstone/Yellow Sandstone.jpg",
     href: "/collection?filter=Sandstone",
   },
   {
