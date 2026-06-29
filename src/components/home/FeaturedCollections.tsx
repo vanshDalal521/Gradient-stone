@@ -10,7 +10,7 @@ const collections = [
     id: "granite",
     title: "Granite",
     image: "/images/granites/Pearl black.png",
-    href: "/collection",
+    href: "/collection?filter=Granite",
   },
   {
     id: "marble",
