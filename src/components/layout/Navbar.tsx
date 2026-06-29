@@ -14,7 +14,7 @@ const navLinks = [
     label: "Products",
     href: "/collection",
     children: [
-      { label: "Granite Slabs", href: "/collection", description: "30+ natural granite varieties" },
+      { label: "Granite Slabs", href: "/collection?filter=Granite", description: "30+ natural granite varieties" },
       { label: "Granite Furniture", href: "/granite-furniture", description: "Handcrafted stone furniture" },
       { label: "Sandstone", href: "/sandstone", description: "Natural warmth for outdoor & indoor" },
       { label: "Marble", href: "/marble", description: "Timeless elegance & luxury" },

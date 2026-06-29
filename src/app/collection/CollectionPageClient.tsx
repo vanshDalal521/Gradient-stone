@@ -9,22 +9,25 @@ import { granites, type GraniteCollection } from "@/lib/data/granites";
 import { ArrowUpRight, Search, X } from "lucide-react";
 
 const allFilters: GraniteCollection[] = ["White", "Black", "Brown", "Green", "Blue", "Pink / Gold", "Marble", "Sandstone", "Cobbles"];
+const nonGraniteCollections: GraniteCollection[] = ["Marble", "Sandstone", "Cobbles"];
 
 export function CollectionPageClient() {
   const searchParams = useSearchParams();
-  const initialFilter = searchParams.get("filter") as GraniteCollection | null;
-  const [activeFilter, setActiveFilter] = useState<GraniteCollection | "All">(initialFilter && allFilters.includes(initialFilter) ? initialFilter : "All");
+  const initialFilter = searchParams.get("filter") as GraniteCollection | "Granite" | null;
+  const [activeFilter, setActiveFilter] = useState<GraniteCollection | "Granite" | "All">(initialFilter && (allFilters.includes(initialFilter as GraniteCollection) || initialFilter === "Granite") ? initialFilter : "All");
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const f = searchParams.get("filter") as GraniteCollection | null;
-    if (f && allFilters.includes(f)) {
+    const f = searchParams.get("filter") as GraniteCollection | "Granite" | null;
+    if (f && (allFilters.includes(f as GraniteCollection) || f === "Granite")) {
       setActiveFilter(f);
     }
   }, [searchParams]);
 
   const filtered = granites.filter((g) => {
-    const matchesFilter = activeFilter === "All" || g.collection === activeFilter;
+    const matchesFilter = activeFilter === "All" || activeFilter === "Granite"
+      ? activeFilter === "All" || !nonGraniteCollections.includes(g.collection)
+      : g.collection === activeFilter;
     const matchesSearch = g.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
@@ -99,6 +102,16 @@ export function CollectionPageClient() {
                 }`}
               >
                 All
+              </button>
+              <button
+                onClick={() => setActiveFilter("Granite")}
+                className={`px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  activeFilter === "Granite"
+                    ? "bg-luxury-gold text-white"
+                    : "bg-surface border border-border text-muted hover:text-foreground hover:border-luxury-gold/30"
+                }`}
+              >
+                Granite
               </button>
               {allFilters.map((filter) => (
                 <button
