@@ -12,7 +12,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   {
     label: "Products",
-    href: "/collection",
+    href: "/collection?filter=Granite",
     children: [
       { label: "Granite Slabs", href: "/collection?filter=Granite", description: "30+ natural granite varieties" },
       { label: "Granite Furniture", href: "/granite-furniture", description: "Handcrafted stone furniture" },

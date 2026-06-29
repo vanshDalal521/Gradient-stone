@@ -25,9 +25,11 @@ export function CollectionPageClient() {
   }, [searchParams]);
 
   const filtered = granites.filter((g) => {
-    const matchesFilter = activeFilter === "All" || activeFilter === "Granite"
-      ? activeFilter === "All" || !nonGraniteCollections.includes(g.collection)
-      : g.collection === activeFilter;
+    const matchesFilter = activeFilter === "All"
+      ? true
+      : activeFilter === "Granite"
+        ? !nonGraniteCollections.includes(g.collection)
+        : g.collection === activeFilter;
     const matchesSearch = g.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
