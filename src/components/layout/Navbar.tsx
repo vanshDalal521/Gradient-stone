@@ -118,8 +118,8 @@ export function Navbar() {
                           : cn("hover:text-[#B8860B]", effectiveScrolled ? "text-[#1A1A1A]" : "text-white/90")
                       )}
                       onClick={(e) => {
-                        // On click, also toggle the dropdown
                         if (isDropdownActive) {
+                          // Dropdown is open — allow navigation to the href
                           setDesktopHover(null);
                         } else {
                           e.preventDefault();
